@@ -1,0 +1,33 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'Italianno', cursive;
+    font-size: 100px;
+    text-align: center;
+    margin-top: 5%;
+}
+
+#logo {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    width: 70%;
+}
+
+#start-btn {
+    background-color: #CAA229;
+    font-family: 'Italianno', cursive;
+    font-size: 45px;
+    border: none;
+    box-shadow: 5px 5px #ae8b21;
+}
+
+#start-btn:hover {
+    background-color: #ae8b21;
+    box-shadow: 5px 5px #a58219;
+}
