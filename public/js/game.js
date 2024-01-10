@@ -2,7 +2,7 @@ const wins = 0;/// i think we want to add up wins until the user or computer run
 const ties = 0;
 const losses = 0;
 
-const cards = 10;
+const cards = 10;//deck
 
 const userAttack = [""]; //
 const userDefend = [""];
@@ -13,8 +13,8 @@ const computerDefend = [""];
 const userLifePoints = 10000;
 const computerLifePoints = 10000;
 
-const userPickCards = 0;
-const computerPickCards = 0;
+const userPickCards = 10;
+const computerPickCards = 10;
 
 
 //user begins game
