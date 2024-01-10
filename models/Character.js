@@ -14,7 +14,7 @@ Character.init(
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
+        },                  
         attack_points: {
             type: DataTypes.INTEGER,
             allowNull: false,
