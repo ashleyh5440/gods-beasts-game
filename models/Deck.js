@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Character extends Model {}
+class Deck extends Model {}
 
-Character.init(
+Deck.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -14,22 +14,15 @@ Character.init(
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        attack_points: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        defense_points: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
+            defaultValue: 'Unnamed Deck',
         },
     },
     {
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'character',
+        modelName: 'deck',
     }
 );
 
-module.exports = Character;
+module.exports = Deck;
