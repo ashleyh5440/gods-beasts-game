@@ -12,37 +12,51 @@ const computerPickCards = 10;
 const cards = async()=> {
     const chooseAttack = [""]; //
     const chooseDefend = [""];
-    const computerChoices = ['attach', 'defent'];
 
-    //ask the user to choose between attack and defend
-    const userChoice = await playerChoice();
+    const computerChoices = ['attach', 'defend'];
     const computerChoice = computerChoices[Math.random()* computerChoices.length];
-    computerChoice.push(/*battle logic*/)
+    computerChoice.push(/*battle logic*/);
+    //add if computer no cards, computer loses
 
-    // if(userChoice.toLowerCase() === 'attack' && computerChoice === 'defend')
-
-    if(chooseAttack.toLowerCase() === 'attack'){
+  //ask the user to choose between attack and defend
+    const userChoice = await playerChoice();
+        if(chooseAttack.toLowerCase() === 'attack'){
         //perform attack logic
         console.log('You chose to attack!');
         chooseAttack.push(/*battle logic*/)        
-    } else if(chooseDefend.toLowerCase()=== 'defend'){
+        } else if(chooseDefend.toLowerCase()=== 'defend'){
         //perform defend logic
         console.log('You chose defend!');
         chooseDefend.push(/*battle logic*/);
-    }else {
+        }else {
         console.log("Please choose attack or defend.");
-    }
+        }
     // display the user cards
-    console.log('Your attack cards:', chooseAttack);
-    console.log('Your defend cards:', chooseDefend);
-    
-    console.log('Computer chose:', computerChoice);
+    // console.log('Your attack cards:', chooseAttack);
+    console.log('Your card!:', userChoice);
+    console.log('Computer choice:', computerChoice);
+    //add if user runs out of cards the user loses 
 };
 
 const playerChoice = async()=>{
     //ask the user to choose attack or defend 
+    const chooseAttack = [""]; //
+    const chooseDefend = [""];
 };
 
+
+//logic for if both user and computer attack. if points are the same its a draw
+
+//logic if user attacks and computer defends. if points are the same its a draw
+
+//logic if user defends and computer attacks. if points are the same its a draw
+
+//logic if both defend take a break and eat a snack 
+
+//logic if run out of life points, user or computer loses 
+
+
+//--------------------------------------------------------------------------
 
 //user begins game
 const playGame = async () =>{
