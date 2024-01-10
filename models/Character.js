@@ -15,6 +15,18 @@ Character.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        class: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                equals: 'God',
+                equals: 'Beast',
+            },
+        },
         attack_points: {
             type: DataTypes.INTEGER,
             allowNull: false,
