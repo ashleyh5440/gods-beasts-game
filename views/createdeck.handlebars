@@ -7,7 +7,7 @@
         <!-- put event listener on container for all cards for the add button -->
         <div class="carousel">
           {{!-- need to make/define array to loop through, should this be in home-routes.js? --}}
-            {{#each as |card|}}
+            {{#each cards as |card|}}
             {{> god-card}}
         </div>
 </section>
@@ -20,33 +20,8 @@
 
         <!-- put event listener on container for all cards for the add button -->
         <div class="carousel">
-            <div class="card-container">
-              <div class="beast-card-full">
-                <div class="card-content">
-                  <div class="name-class">
-                    <!-- character name -->
-                    <h3></h3>
-                  </div>
-                  <div class="card-image-container-full">
-                    <img class="card-image-full" src="">
-                  </div>
-                  <div class="character-info">
-                    <!-- character class -->
-                    <p><br>
-                      <!-- character description -->
-                      </p>
-                  </div>
-                  <div class="points">
-                    <!-- attack points -->
-                    <br>
-                    <!-- defense points -->
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <!-- <button data-id {{id}} class="something">hi</button> -->
-              <button type="button" class="btn btn-primary add-button">Add to deck</button>
-            </div>
+            {{#each cards as |card|}}
+            {{> god-card}}
         </div>
 </section>
 
