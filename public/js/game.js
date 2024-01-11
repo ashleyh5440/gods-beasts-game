@@ -13,7 +13,7 @@ const userPickCards = 10;
 const computerPickCards = 10;
 
  //database name, id & attack points array
-const choseAttack = [""];
+const responseAttack = await fetch(baseurl.replace("attack_points")); // const choseAttack = [""];????????????
 
 //database name, id &  defend points array
 const choseDefend = [""];
