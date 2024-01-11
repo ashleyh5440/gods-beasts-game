@@ -17,11 +17,11 @@ Character.init(
         },
         class: {
             type: DataTypes.STRING,
-            allowNull: flase,
+            allowNull: false,
         },  
         description: {
             type: DataTypes.STRING,
-            allowNull: flase,
+            allowNull: false,
         },                
         attack_points: {
             type: DataTypes.INTEGER,

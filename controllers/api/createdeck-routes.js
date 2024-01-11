@@ -20,11 +20,11 @@ router.get('/', async (req, res) => {
     });
 
     // Serialize data so the template can read it
-    const card = cardChoices.map((project) => project.get({ plain: true }));
+    const cards = cardChoices.map((project) => project.get({ plain: true }));
 
     // Pass serialized data and session flag into template
     res.render('createdeck', { 
-      posts, 
+      cards, 
       logged_in: req.session.logged_in 
     });
   } catch (err) {
