@@ -1,96 +1,166 @@
-const wins = 0;/// i think we want to add up wins until the user or computer run out of life points
+//tally wins, loses and ties
+const wins = 0;
 const ties = 0;
 const losses = 0;
 
+//each player begins with 10000 life points!
 const userLifePoints = 10000;
 const computerLifePoints = 10000;
+
+const cards = 0; //???
 
 const userPickCards = 10;
 const computerPickCards = 10;
 
-//add event listenters for each card 
-const cards = async()=> {
-    const chooseAttack = [""]; //
-    const chooseDefend = [""];
+ //database name, id & attack points array
+const choseAttack = [""];
 
-    const computerChoices = ['attach', 'defend'];
-    const computerChoice = computerChoices[Math.random()* computerChoices.length];
-    computerChoice.push(/*battle logic*/);
-    //add if computer no cards, computer loses
+//database name, id &  defend points array
+const choseDefend = [""];
 
-  //ask the user to choose between attack and defend
-    const userChoice = await playerChoice();
-        if(chooseAttack.toLowerCase() === 'attack'){
-        //perform attack logic
-        console.log('You chose to attack!');
-        chooseAttack.push(/*battle logic*/)        
-        } else if(chooseDefend.toLowerCase()=== 'defend'){
-        //perform defend logic
-        console.log('You chose defend!');
-        chooseDefend.push(/*battle logic*/);
-        }else {
-        console.log("Please choose attack or defend.");
-        }
-    // display the user cards
-    // console.log('Your attack cards:', chooseAttack);
-    console.log('Your card!:', userChoice);
+
+//add event listenters for each card
+document.getElementById('attackButton').addEventListener('click', function(){
+    playerChoice('attack');
+});
+
+document.getElementById('defendButton').addEventListener('click', function(){
+    playerChoice('defend');
+});
+
+
+//user plays a card
+const userCardPlay = async(choice)=>{
+    userChoice = choice;
+    if(choice === 'attack'){
+    console.log('You chose to attack!');
+    choseAttack.push(getAttackPoints());
+    } else if(choseDefend.toLowerCase()=== 'defend'){
+    console.log('You chose defend!');
+    choseDefend.push(getDefendPoints());
+    }else {
+    console.log("Please choose attack or defend.");
+    }
+
+    if(userPickCards !== 0){
+        await computerCardPlay();
+    }else{
+        console.log('You have run out of cards. Game over!');//if the user runs out of cards the game is over
+        endGame();
+    }  
+};
+
+//computer plays a card
+const computerCardPlay = async()=> {
+    const computerChooses = ['attack', 'defend'];
+    const computerChoice = computerChooses[Math.random()* computerChooses.length];
+
+    if(computerChoice === 'attack'){
+        choseAttack.push(getAttackPoints());
+    }else {
+        choseDefend.push(getDefendPoints());
+    }
     console.log('Computer choice:', computerChoice);
-    //add if user runs out of cards the user loses 
 };
 
-const playerChoice = async()=>{
-    //ask the user to choose attack or defend 
-    const chooseAttack = [""]; //
-    const chooseDefend = [""];
+const getAttackPoints= () =>{
+    const lastAttackPoints = choseAttack.lenth > 0 ? choseAttack[choseAttack.length - 1] : 0;
+    lastAttackPoints.push(battle);
+}
+
+const getDefendPoints= () =>{
+    const lastDefendPoints = choseDefend.lenth > 0 ? choseDefend[choseDefend.length - 1] : 0;
+    lastDefendPoints.push(battle);
 };
 
 
-//logic for if both user and computer attack. if points are the same its a draw
+//battle logic
+const battle = async(userChoice, userAttackPoints, userDefendPoints)=>{
+    const computerChoice = choseAttack.length > choseDefend.length ? 'attack' : 'defend';
+    const computerAttackPoints = getAttackPoints();
+    const computerDefendPoints = getDefendPoints();
 
-//logic if user attacks and computer defends. if points are the same its a draw
+    console.log('User choice:', userChoice);
+    console.log('Computer choice:', computerChoice);
+    //logic for if both user and computer attack. if points are the same its a draw
+    if(userChoice === 'attack' && computerChoice === 'attack'){
+        //compare attacks points
+        if(userAttackPoints > computerAttackPoints){
+            console.log('You win!');
+            wins++
+            computerAttackPoints -= userLifePoints;
+        }else if (userAttackPoints < computerAttackPoints){
+            console.log('You lose!');
+            losses++
+            userAttackPoints -= computerLifePoints;
+        }else{
+            console.log('Its a draw!');
+            ties++;
+        }
+    }
 
-//logic if user defends and computer attacks. if points are the same its a draw
+    //logic if user attacks and computer defends. if points are the same its a draw
+    if(userChoice === 'attack' && computerChoice === 'defend'){
+        if(userAttackPoints > computerDefendPoints){
+            console.log('You win!');
+            wins++
+            computerDefendPoints -= computerLifePoints;
+        }else if ( userAttackPoints < computerDefendPoints){
+            console.log('You lose!');
+            losses++
+            userLifePoints -= userAttackPoints/2;
+        }else{
+            console.log('Its a draw!');
+            ties++;
+        }
+    }
 
-//logic if both defend take a break and eat a snack 
+    //logic if user defends and computer attacks. if points are the same its a draw
+    if(userChoice === 'defend' && computerChoice === 'attack'){
+        if(userDefendPoints > computerAttackPoints){
+            console.log('You win!');
+            wins++
+            computerLifePoints -= computerAttackPoints/2;
+        }else if ( userDefendPoints < computerAttackPoints){
+            console.log('You lose!');
+            losses++
+            userDefendPoints -= userLifePoints;
+        }else{
+            console.log('Its a draw!');
+            ties++;
+        }
+    }
+    //logic if both defend play another card
+    if(userChoice === 'defend' && computerChoice === 'defend'){
 
-//logic if run out of life points, user or computer loses 
+    }
 
+    //check for losers
+    if(userLifePoints <= 0){
+        console.log('You have died');
+        endGame();
+    }
+    if(computerLifePoints <= 0){
+        console.log('The computer has died');
+        endGame();
+    }
 
-//--------------------------------------------------------------------------
+    //display final scores
+    console.log(`Wins: ${wins}, Ties: ${ties}, Losses: ${losses}`);
 
-//user begins game
-const playGame = async () =>{
-    const cancelGame = 0;//
-    //if use pressed Cancel, immediately end function
-    if(cancelGame){
-        return;
-    };
+};
 
-    //user chooses card to play (atack or defend)
-    // const playerChoice = 0; //window.prompt("Enter...")
-    //computer gets random index from array of 10 options 
-    // const index = Math.floor(Math.random()* options.length);
-    // const computerChoice = options[index];
-    //co
-    //if choices are the same, its a tie
-    if(userChoice === computerChoice){
-        ties++;
-        window.alert("its a tie!");
-//check every win condition for player
-    // }else if(
-    //     (userChoice === userAttack) ={
+//end game
+const endGame = () =>{
+    console.log('Game over!');
+    resetGame();
+};
 
-    //     };
-    // ){
-    //     wins++;
-    //     window.alert("You win!");
-    //      //if above conditions failed, assume player lost
-    // }else{
-    //     losses++;
-    //     window.alert("You lost!");
-    // }
-    
-   // variable to turn over cards
-   //compaire lifepoints 
-}};
-
+//reset game
+const resetGame = () => {
+    userLifePoints = 10000;
+    computerLifePoints = 10000;
+    wins = 0;
+    ties = 0;
+    losses = 0;
+};
