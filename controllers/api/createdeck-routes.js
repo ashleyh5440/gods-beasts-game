@@ -2,22 +2,10 @@ const router = require('express').Router();
 const { Character, User } = require('../models');
 // const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
+router.get('/createdeck', async (req, res) => {
   try {
     // Get all cardss and JOIN with user data
-    const cardChoices = await Character.findAll({
-      include: [
-        {
-          model: Character,
-          attributes: 
-          ['name'],
-          ['class'],
-          ['description'],
-          ['attack_points'],  
-          ['defense_points'],
-        },
-      ],
-    });
+    const cardChoices = await Character.findAll({});
 
     // Serialize data so the template can read it
     const cards = cardChoices.map((project) => project.get({ plain: true }));
