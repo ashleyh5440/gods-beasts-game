@@ -14,7 +14,15 @@ Character.init(
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-        },                  
+        },
+        class: {
+            type: DataTypes.STRING,
+            allowNull: flase,
+        },  
+        description: {
+            type: DataTypes.STRING,
+            allowNull: flase,
+        },                
         attack_points: {
             type: DataTypes.INTEGER,
             allowNull: false,
