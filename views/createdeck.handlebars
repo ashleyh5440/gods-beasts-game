@@ -1,0 +1,28 @@
+ <section class="god-carousel-container">
+      <h2>Gods</h2>
+      <!-- arrow buttons -->
+        <button class="pre-btn"><img src="./assets/images/arrow.png"></button>
+        <button class="nxt-btn"><img src="./assets/images/arrow.png"></button>
+
+        <!-- put event listener on container for all cards for the add button -->
+        <div class="carousel">
+          {{!-- need to make/define array to loop through, should this be in home-routes.js? --}}
+            {{#each cards as |card|}}
+            {{> god-card}}
+        </div>
+</section>
+
+<section class="beast-carousel-container">
+      <h2>Beasts</h2>
+      <!-- arrow buttons -->
+        <button class="pre-btn"><img src="./assets/images/arrow.png"></button>
+        <button class="nxt-btn"><img src="./assets/images/arrow.png"></button>
+
+        <!-- put event listener on container for all cards for the add button -->
+        <div class="carousel">
+            {{#each cards as |card|}}
+            {{> god-card}}
+        </div>
+</section>
+
+    <script src="../public/js/createdeck.js"></script>
