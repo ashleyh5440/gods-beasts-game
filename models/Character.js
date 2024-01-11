@@ -35,6 +35,14 @@ Character.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
+        deck_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'deck',
+                key: 'id',
+            },
+            allowNull: true,
+        },
     },
     {
         sequelize,
