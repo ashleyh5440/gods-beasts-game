@@ -9,12 +9,13 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: Character,
-          attributes: 
-          ['name'],
-          ['class'],
-          ['description'],
-          ['attack_points'],  
-          ['defense_points'],
+          attributes: [
+          'name',
+          'class',
+          'description',
+          'attack_points',  
+          'defense_points',
+          ],
         },
       ],
     });
@@ -24,7 +25,7 @@ router.get('/', async (req, res) => {
 
     // Pass serialized data and session flag into template
     res.render('createdeck', { 
-      posts, 
+      card, 
       logged_in: req.session.logged_in 
     });
   } catch (err) {
