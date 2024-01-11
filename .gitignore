@@ -1,3 +1,9 @@
+thumbs.db 
+DS_Store
+.env
+.vscode
+package-lock-json
+
 # Logs
 logs
 *.log
