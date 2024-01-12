@@ -5,7 +5,7 @@
       "description": "Known as Mother of the Deep and Mistress of the Sea, Sedna is the mother of all sea creatures. Those who travel along the sea must pay her reverence or face her wrath.",
       "attack_points": 400,
       "defense_points": 400,
-      "image": "images/cards/gods/sedna.jpg"
+      "image": "sedna.jpg"
     },
     {
         "name": "Coyote",
@@ -13,7 +13,7 @@
         "description": "The incarnation of change and mischief, the eternal trickster Coyote can be funny or fearsome. Vain and greedy, he can harm just as easily as help those who call upon him.",
         "attack_points": 500,
         "defense_points": 850,
-        "image": "cards/coyote.jpg"
+        "image": "coyote.jpg"
       },
       {
         "name": "Pachamama",
