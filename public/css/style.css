@@ -1,3 +1,7 @@
+body {
+    background-color: black;
+}
+
 .homepage-layout {
     display: flex;
     flex-direction: column;
@@ -79,6 +83,14 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.god {
+    background-image: url(../images/god-card.jpg);
+}
+
+.beast {
+    background-image: url(../images/beast-card.jpg);
 }
 
 .card-content {
