@@ -1,11 +1,10 @@
-const Character = require('./Character');
-const Deck = require('./Deck');
 const User = require('./User');
+const Deck = require('./Deck');
+const Character = require('./Character');
 
-Deck.hasMany(Character, { as: 'characters' });
+Deck.hasMany(Character, { foreignKey: 'deck_id' });
 Character.belongsTo(Deck, {
-    foreignKey: 'deckId',
-    as: 'deck'
+    foreignKey: 'deck_id',
 })
 
 
