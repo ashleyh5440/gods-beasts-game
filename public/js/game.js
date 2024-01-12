@@ -1,3 +1,8 @@
+const fs = require('fs');
+
+//read the JSON file synchronously
+const characterData = JSON.parse(fs.readFileSync('path/to/character-seeds.json', 'utf8' ));
+
 //tally wins, loses and ties
 const wins = 0;
 const ties = 0;
@@ -12,11 +17,11 @@ const cards = 0; //???
 const userPickCards = 10;
 const computerPickCards = 10;
 
- //database name, id & attack points array
-const choseAttack = [""];
+ //card attach points
+let choseAttack = characterData.map(character => character.attack_points);
 
-//database name, id &  defend points array
-const choseDefend = [""];
+//card defend points
+let choseDefend = characterData.map(character => character.defend_points);
 
 
 //add event listenters for each card
@@ -69,7 +74,7 @@ const getAttackPoints= () =>{
 }
 
 const getDefendPoints= () =>{
-    const lastDefendPoints = choseDefend.lenth > 0 ? choseDefend[choseDefend.length - 1] : 0;
+    const lastDefendPoints = choseDefend.length > 0 ? choseDefend[choseDefend.length - 1] : 0;
     lastDefendPoints.push(battle);
 };
 
@@ -87,10 +92,12 @@ const battle = async(userChoice, userAttackPoints, userDefendPoints)=>{
         //compare attacks points
         if(userAttackPoints > computerAttackPoints){
             console.log('You win!');
+            userWins();
             wins++
             computerAttackPoints -= userLifePoints;
         }else if (userAttackPoints < computerAttackPoints){
             console.log('You lose!');
+            userLoses();
             losses++
             userAttackPoints -= computerLifePoints;
         }else{
@@ -103,10 +110,12 @@ const battle = async(userChoice, userAttackPoints, userDefendPoints)=>{
     if(userChoice === 'attack' && computerChoice === 'defend'){
         if(userAttackPoints > computerDefendPoints){
             console.log('You win!');
+            userWins();
             wins++
             computerDefendPoints -= computerLifePoints;
         }else if ( userAttackPoints < computerDefendPoints){
             console.log('You lose!');
+            userLoses();
             losses++
             userLifePoints -= userAttackPoints/2;
         }else{
@@ -119,10 +128,12 @@ const battle = async(userChoice, userAttackPoints, userDefendPoints)=>{
     if(userChoice === 'defend' && computerChoice === 'attack'){
         if(userDefendPoints > computerAttackPoints){
             console.log('You win!');
+            userWins();
             wins++
             computerLifePoints -= computerAttackPoints/2;
         }else if ( userDefendPoints < computerAttackPoints){
             console.log('You lose!');
+            userLoses();
             losses++
             userDefendPoints -= userLifePoints;
         }else{
@@ -138,10 +149,12 @@ const battle = async(userChoice, userAttackPoints, userDefendPoints)=>{
     //check for losers
     if(userLifePoints <= 0){
         console.log('You have died');
+        userLoses();
         endGame();
     }
     if(computerLifePoints <= 0){
         console.log('The computer has died');
+        userWins();
         endGame();
     }
 
@@ -149,6 +162,20 @@ const battle = async(userChoice, userAttackPoints, userDefendPoints)=>{
     console.log(`Wins: ${wins}, Ties: ${ties}, Losses: ${losses}`);
 
 };
+
+//winning and losing sounds
+//<audio id="winSound" src="path/to/public/sound-bites/YouWin-soundEffect.mp3"/>"
+const userWins = () =>{
+    const winSound = document.getElementById('windSound');
+    winSound.play();
+};
+
+//<audio id="loseSound" src="path/to/public/sound-bites/Defeat-soundEffect.mp3"/>
+const userLoses = () =>{
+    const loseSound = document.getElementById('loseSound');
+    loseSound.play();
+};
+
 
 //end game
 const endGame = () =>{
@@ -163,4 +190,5 @@ const resetGame = () => {
     wins = 0;
     ties = 0;
     losses = 0;
+    userCardPlay();
 };
