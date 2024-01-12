@@ -12,8 +12,6 @@ router.get('/login', async(req, res) => {
     res.render('login')
 });
 
-router.get
-
 const { Character, User } = require('../models');
 // const withAuth = require('../utils/auth');
 
@@ -33,6 +31,23 @@ router.get('/createdeck', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+
+    res.render('log_sign');
 });
 
+router.get('/returninguser', async(req, res) => {
+    res.render('login');
+})
+
+router.get('/options', async(req, res) => {
+    res.render('options');
+})
+
+router.get('/play', async(req, res) => {
+    res.render('game');
+})
+
+router.get('/signup', async(req, res) => {
+    res.render('signup');
+})
 module.exports = router;

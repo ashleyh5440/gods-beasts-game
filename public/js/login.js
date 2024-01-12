@@ -17,7 +17,7 @@ async function loginFormHandler(event) {
       });
       if (response.ok) {
          // If successful, redirect the browser to the profile page
-        document.location.replace("/dashboard");
+        document.location.replace("/");
       } else {
         let result = await response.json();
         alert(result.message);
