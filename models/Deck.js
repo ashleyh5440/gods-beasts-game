@@ -16,6 +16,10 @@ Deck.init(
             allowNull: false,
             defaultValue: 'Unnamed Deck',
         },
+        // character_ids {
+        //     type: DataTypes.ARRAY,
+
+        // },
     },
     {
         sequelize,
