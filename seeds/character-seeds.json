@@ -149,7 +149,7 @@
         "description": "Tales of the seven-foot-tall hairy wild men of the forests have been spoken about for hundreds of years. The elusive Sasquatch are guardians of the wilderness and are not afraid to defend it.",
         "attack_points": 400,
         "defense_points": 700,
-        "image": "sasquatch.jpg"
+        "image": "sasquatch.jpeg"
       },
       {
         "name": "Windigo",
@@ -157,7 +157,7 @@
         "description": "A towering figure with ash-gray skin, long claws, and lips chewed ragged, the wendigo hunts during the coldest time of the year to satisfy its insatiable hunger. Each life it claims only makes its hunger grow.",
         "attack_points": 700,
         "defense_points": 500,
-        "image": "windigo.jpg"
+        "image": "windigo.jpeg"
       },
       {
         "name": "Mapinguari",
@@ -165,7 +165,7 @@
         "description": "The humanoid mapinguari has a gaping mouth in its abdomen and a pungent odor strong enough to knock a person unconscious. It uses its fearsome strength to defend the jungles it calls home from those who would harm it.",
         "attack_points": 600,
         "defense_points": 760,
-        "image": "mapinguari.jpg"
+        "image": "mapinguari.pmg"
       },
       {
         "name": "El Silbón",
@@ -173,7 +173,7 @@
         "description": "Whistling his ghastly tune, El Silbón stalks the grasslands at night for victims to add to his sack full of bones. The closer his whistle sounds, the safer you are. If he sounds far away, it's already too late.",
         "attack_points": 650,
         "defense_points": 200,
-        "image": "elsilbon.jpg"
+        "image": "elsilbon.png"
       },
       {
         "name": "La Diablesse",
@@ -181,7 +181,7 @@
         "description": "Her poise and figure make her seem beautiful, but the long dress and wide hat hide a cow hoof and a monstrous face. La Diablesse casts spells on unfaithful men to lure them into the forests to their deaths.",
         "attack_points": 500,
         "defense_points": 600,
-        "image": "ladiablesse.jpg"
+        "image": "ladiablesse.jpeg"
       },
       {
         "name": "Chupacabra",
@@ -189,7 +189,7 @@
         "description": "The blood sucking chupacabra prefers goats, but it has been known to feed on nearly anything. Appearing either reptilian with red eyes and spikes or as a hairless canine, they terrorize cities and farms alike.",
         "attack_points": 450,
         "defense_points": 300,
-        "image": "chupacabra.jpg"
+        "image": "chupacabra.jpeg"
       },
       {
         "name": "Kaupe",
@@ -197,7 +197,7 @@
         "description": "The malevolent Kaupe was once a ruler before he was caught devouring his citizens. After being killed, he returned as a spirit to lure people to him. Even as a spirit, he has not lost a taste for human flesh.",
         "attack_points": 400,
         "defense_points": 550,
-        "image": "kaupe.jpg"
+        "image": "kaupe.png"
       },
       {
         "name": "Maero",
@@ -205,7 +205,7 @@
         "description": "These wild giants of the woods inhabit mountains and forests. After being pushed from their sacred lands by humans, the Maero often attack and eat anyone and anything that intrude on their territories.",
         "attack_points": 670,
         "defense_points": 560,
-        "image": "maero.jpg"
+        "image": "maero.png"
       },
       {
         "name": "Ninki Nanka",
@@ -213,7 +213,7 @@
         "description": "The swamp-dwelling Ninki Nanka is a black and green snake-like creature 50 meters long with a feathery crest. Seeing the Ninki Nanka almost guarantees death, and nothing but its own reflection can kill it.",
         "attack_points": 550,
         "defense_points": 700,
-        "image": "ninkinanka.jpg"
+        "image": "ninkinanka.png"
       },
       {
         "name": "Tokoloshi",
@@ -221,7 +221,7 @@
         "description": "With the ability to turn invisible, the mischievous and violent Tokoloshi is responsible for crimes from scaring children to causing illness and death. After its victims are asleep, it sneaks into homes and wreaks havoc.",
         "attack_points": 300,
         "defense_points": 100,
-        "image": "tokoloshi.jpg"
+        "image": "tokoloshi.png"
       },
       {
         "name": "Werewolf",
@@ -229,7 +229,7 @@
         "description": "The result of a punishment or blessing, werewolves have a legacy of strength and violence. Whether they change shape at will or are forced to do so under a full moon, werewolves are particularly ferocious and deadly.",
         "attack_points": 870,
         "defense_points": 600,
-        "image": "werewolf.jpg"
+        "image": "werewolf.png"
       },
       {
         "name": "Leshy",
@@ -237,7 +237,7 @@
         "description": "Lord of forests, the Leshy can look like anything in its domain -- trees, animals, even wind. Known to both help travelers or lead them astray, the Leshy demands that all respect its control of the forest, or else.",
         "attack_points": 400,
         "defense_points": 650,
-        "image": "leshy.jpg"
+        "image": "leshy.png"
       },
       {
         "name": "Manananggal",
@@ -245,7 +245,7 @@
         "description": "A beautiful woman by day and a self-segmenting monster by night, the manananggal separates her torso from her body to hunt once the sun sets. She feeds by using a long tongue to suck out organs from sleeping victims.",
         "attack_points": 850,
         "defense_points": 300,
-        "image": "mananaggal.jpg"
+        "image": "mananaggal.png"
       },
       {
         "name": "Gumhio",
@@ -253,7 +253,7 @@
         "description": "The shapeshifting gumiho appears either as an alluring woman or a nine-tailed fox. When not feeding on the hearts and livers of humans, they use the beads hidden in their mouths to steal energy through a kiss.",
         "attack_points": 770,
         "defense_points": 400,
-        "image": "gumhio.jpg"
+        "image": "gumhio.jpeg"
       },
       {
         "name": "Papinijuwari",
@@ -261,7 +261,7 @@
         "description": "One-eyed giants that live where the sky ends, the Papinijuwaris descend upon the earth to feed on the dead and dying. Finding their victims through smell, they shrink small enough to enter the body and drink the blood.",
         "attack_points": 650,
         "defense_points": 600,
-        "image": "papinijuwari.jpg"
+        "image": "papinijuwari.png"
       },
       {
         "name": "Yara-ma-yha-who",
@@ -269,7 +269,7 @@
         "description": "Short, red, with a large head and suckers at the ends of its fingers and toes, the Yara-ma-yha-who uses its suckers to drain the blood from its victims. It then swallows the person whole, regurgitates them, and repeats.",
         "attack_points": 300,
         "defense_points": 200,
-        "image": "yaramayhawho.jpg"
+        "image": "yaramayhawho.png"
       },
       {
         "name": "Ghoul",
@@ -285,6 +285,6 @@
         "description": "The giant serpent Falak rests deep below all of creation. Its said that his power is so great that he has the ability to swallow the earth and heavens. It's only his fear of one more powerful that leashes the beast.",
         "attack_points": 860,
         "defense_points": 750,
-        "image": "falak.jpg"
+        "image": "falak.png"
       }
   ]
