@@ -43,6 +43,11 @@ Character.init(
             },
             allowNull: true,
         },
+        // name of card image column, every card has a single image name
+        image: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        }
     },
     {
         sequelize,
