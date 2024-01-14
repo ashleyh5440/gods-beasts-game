@@ -33,7 +33,7 @@ main {
 
 .button-container {
     margin-top: 500px;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: flex-end;
     border: 5px solid purple;
