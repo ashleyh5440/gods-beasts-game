@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //move card to the center
     function moveCard(card) {
         const centerSection = document.querySelector('.center');
-        centerSection.innerHTML = ''; //clear the center section
+        // centerSection.innerHTML = ''; //clear the center section
         centerSection.appendChild(card.cloneNode(true)); //append a clone of the card
         console.log('before hidden class');
         //show the attack and defend buttons
