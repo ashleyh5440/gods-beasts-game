@@ -33,7 +33,7 @@ form {
 }
 
 /* styles for playing cards */
-.god-card {
+#god-card {
     width: 200px;
     height: 300px;
     border: 1px solid black;
