@@ -2,6 +2,12 @@ body {
     background-color: black;
 }
 
+a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Use the default color */
+    display: inline-block; /* Make it an inline block */
+  }
+
 .homepage-layout {
     display: flex;
     flex-direction: column;
@@ -259,7 +265,7 @@ nav {
     margin-top: 20%;
 }
 
-#log-in-btn1, #log-in-btn {
+#log-in-btn {
     background-color: #CAA229;
     font-family: 'Italianno', cursive;
     font-size: 40px;
@@ -268,14 +274,30 @@ nav {
     margin: 8%;
 }
 
-#sign-up-btn {
+#log-in-btn1 {
+    width: 120px;
     background-color: #CAA229;
     font-family: 'Italianno', cursive;
     font-size: 40px;
     border: none;
     box-shadow: 5px 5px #ae8b21;
-    margin: 8%;
+    /* margin: 8%; */
 }
+
+#sign-up-btn {
+    width: 120px;
+    background-color: #CAA229;
+    font-family: 'Italianno', cursive;
+    font-size: 40px;
+    border: none;
+    box-shadow: 5px 5px #ae8b21;
+    margin-left: 30%;
+}
+
+#log-in-btn1:hover {
+    background-color: #ae8b21;
+    box-shadow: 5px 5px #a58219;
+} 
 
 #log-in-btn:hover {
     background-color: #ae8b21;
@@ -288,21 +310,23 @@ nav {
 }
 
 #new-game-btn {
+    width: 140px;
     background-color: #CAA229;
     font-family: 'Italianno', cursive;
     font-size: 30px;
     border: none;
     box-shadow: 5px 5px #ae8b21;
-    margin: 3% 8%;
+    margin: 3% 5%;
 }
 
 #view-scores-btn {
+    width: 140px;
     background-color: #CAA229;
     font-family: 'Italianno', cursive;
     font-size: 30px;
     border: none;
     box-shadow: 5px 5px #ae8b21;
-    margin: 3% 8%;
+    margin: 3% 25%;
 }
 
 #new-game-btn:hover {
