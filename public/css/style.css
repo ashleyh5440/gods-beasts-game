@@ -32,6 +32,29 @@ form {
     font-size: 25px;
 }
 
+/* nav */
+nav {
+    margin-left: 3%;
+}
+
+#home-button, #account-button, #deck-button {
+    background-color: rgb(39, 3, 71);
+    border: none;
+    color: white; 
+}
+
+#home-button:hover {
+    background-color: rgb(27, 5, 47);
+}
+
+#account-button:hover {
+    background-color: rgb(27, 5, 47);
+}
+
+#deck-button:hover {
+    background-color: rgb(27, 5, 47);
+}
+
 /* styles for playing cards */
 #god-card {
     width: 200px;
@@ -217,6 +240,7 @@ form {
     font-size: 45px;
     border: none;
     box-shadow: 5px 5px #ae8b21;
+    margin-top: 5%;
 }
 
 #start-btn:hover {
@@ -235,7 +259,7 @@ form {
     margin-top: 20%;
 }
 
-.log-in-btn {
+#log-in-btn1, #log-in-btn {
     background-color: #CAA229;
     font-family: 'Italianno', cursive;
     font-size: 40px;
@@ -244,7 +268,7 @@ form {
     margin: 8%;
 }
 
-.sign-up-btn {
+#sign-up-btn {
     background-color: #CAA229;
     font-family: 'Italianno', cursive;
     font-size: 40px;
@@ -253,12 +277,12 @@ form {
     margin: 8%;
 }
 
-.log-in-btn:hover {
+#log-in-btn:hover {
     background-color: #ae8b21;
     box-shadow: 5px 5px #a58219;
 }
 
-.sign-up-btn:hover {
+#sign-up-btn:hover {
     background-color: #ae8b21;
     box-shadow: 5px 5px #a58219;
 }

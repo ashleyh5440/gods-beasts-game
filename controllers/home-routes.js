@@ -12,6 +12,7 @@ router.get('/login', async(req, res) => {
     res.render('login')
 });
 
+// for createdeck page
 const { Character, User } = require('../models');
 // const withAuth = require('../utils/auth');
 
@@ -39,6 +40,14 @@ router.get('/returninguser', async(req, res) => {
     res.render('login');
 })
 
+router.get('/signup', async(req, res) => {
+  res.render('signup');
+})
+
+router.get('/log_sign', async(req, res) => {
+  res.render('log_sign');
+})
+
 router.get('/options', async(req, res) => {
     res.render('options');
 })
@@ -47,7 +56,8 @@ router.get('/play', async(req, res) => {
     res.render('game');
 })
 
-router.get('/signup', async(req, res) => {
-    res.render('signup');
+router.get('/viewscores', async(req, res) => {
+  res.render('scores');
 })
+
 module.exports = router;
