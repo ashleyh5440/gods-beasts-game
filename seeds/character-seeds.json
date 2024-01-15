@@ -165,7 +165,7 @@
         "description": "The humanoid mapinguari has a gaping mouth in its abdomen and a pungent odor strong enough to knock a person unconscious. It uses its fearsome strength to defend the jungles it calls home from those who would harm it.",
         "attack_points": 600,
         "defense_points": 760,
-        "image": "mapinguari.pmg"
+        "image": "mapinguari.png"
       },
       {
         "name": "El Silbón",
