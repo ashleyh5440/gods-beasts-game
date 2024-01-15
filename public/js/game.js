@@ -206,7 +206,7 @@ const battle = async ({userAttackPoints, userDefendPoints, computerAttackPoints,
     // const { computerAttackPoints, computerDefendPoints} = computerMove();
    console.log('user vs computer time!')
     //logic for if both user and computer attack. if points are the same its a draw
-    if (userAttackPoints === 'attack' && computerAttackPoints === 'attack') {
+    // if (userAttackPoints === 'attack' && computerAttackPoints === 'attack') {
         //compare attacks points
         if (userAttackPoints > computerAttackPoints) {
             console.log('You win!');
@@ -222,10 +222,10 @@ const battle = async ({userAttackPoints, userDefendPoints, computerAttackPoints,
             console.log('Its a draw!');
             ties++;
         }
-    }
+    // }
 
     //logic if user attacks and computer defends. if points are the same its a draw
-    if (userAttackPoints === 'attack' && computerDefendPoints === 'defend') {
+    // if (userAttackPoints === 'attack' && computerDefendPoints === 'defend') {
         if (userAttackPoints > computerDefendPoints) {
             console.log('You win!');
             userWins();
@@ -240,10 +240,10 @@ const battle = async ({userAttackPoints, userDefendPoints, computerAttackPoints,
             console.log('Its a draw!');
             ties++;
         }
-    }
+    // }
 
     //logic if user defends and computer attacks. if points are the same its a draw
-    if (userDefendPoints === 'defend' && computerAttackPoints === 'attack') {
+    // if (userDefendPoints === 'defend' && computerAttackPoints === 'attack') {
         if (userDefendPoints > computerAttackPoints) {
             console.log('You win!');
             userWins();
@@ -258,7 +258,7 @@ const battle = async ({userAttackPoints, userDefendPoints, computerAttackPoints,
             console.log('Its a draw!');
             ties++;
         }
-    }
+    // }
     //logic if both defend play another card
     if (userDefendPoints === 'defend' && computerDefendPoints === 'defend') {
 
