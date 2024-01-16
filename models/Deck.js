@@ -16,6 +16,7 @@ Deck.init(
             allowNull: false,
             defaultValue: 'Unnamed Deck',
         },
+        user_id: 
         // character_ids {
         //     type: DataTypes.ARRAY,
 
