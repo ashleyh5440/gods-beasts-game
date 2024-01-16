@@ -34,6 +34,7 @@ let computerTurnPromise = null//added a variable to store the promise.
 
 //user selects a god or beast card
 document.addEventListener('DOMContentLoaded', function () {
+    loadScores();
     //fetch the JSON data
     // fetch('path/to/seeds/character-seeds.json',    //when ready for server change to GET method
     // .then(response => response.json())
@@ -305,7 +306,7 @@ const battle = async ({userChoice, userAttackPoints, userDefendPoints, computerA
 
     //display final scores
     console.log(`Wins: ${wins}, Ties: ${ties}, Losses: ${losses}`);
-
+    saveScores(wins, ties, losses);
     gameState = 'userTurn';//change game state to the user for the next round
 
 };
@@ -338,4 +339,51 @@ const resetGame = () => {
     ties = 0;
     losses = 0;
     gameState = 'userTurn';  // change game state to user turn.
+    saveScores();
 };
+
+const saveScores = async (Wins, ties, losses) => {
+    const scores={
+    username, 
+    wins,
+    losses,
+    ties,
+
+};
+
+try{
+    const response = await fetch('http://localhost:3001/scores', {
+        method: 'POST',
+        header: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(scores),
+});
+if(response.ok){
+    console.log('Scores saved successfully!');
+}else{
+    console.error('Failed to save scores.');
+}
+}catch (error){
+    console.error('Error:', error);
+}
+};
+
+
+const loadScores = async () => {
+    try{
+        const response = await fetch(`http://localhost3001/loadScores/${username}`);
+        if(response.ok){
+            const data = await response.json();
+            console.log('Scores loaded:', data);
+            //update
+            wins = data.wins;
+            losses = data.losses;
+            ties = data.ties;
+        }else{
+            console.error('Failed to load scores');
+        }
+    }catch(error){
+            console.error('Error:', error);
+        }
+    };
