@@ -62,9 +62,9 @@ nav {
 }
 
 /* styles for playing cards */
-#god-card {
-    width: 200px;
-    height: 300px;
+.god-card {
+    width: 150px;
+    height: 200px;
     border: 1px solid black;
     overflow: hidden;
     background-image: url(../images/god-card.jpg);
@@ -131,8 +131,8 @@ nav {
 }
 
 .card-image-container {
-    width: 150px;
-    height: 120px;
+    width: 100px;
+    height: 80px;
 }
 
 .card-image-container-full {
@@ -142,7 +142,7 @@ nav {
 
 .card-image {
     width: 100%;
-    height: 120px;
+    height: 80px;
     overflow: hidden;
 }
 
@@ -189,7 +189,6 @@ nav {
     width: 322px;
     height: 520px;
     margin-right: 40px;
-    /* border: 1px solid red; */
   }
 
 .pre-btn, .nxt-btn {
@@ -230,6 +229,130 @@ nav {
     box-shadow: 5px 5px #ae8b21;
     margin-left: 30%;
     margin-top: 6px;
+}
+
+/* styles for game screen*/
+.game-screen {
+  background-image: url(../images/game-background.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.opponent, .user {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  max-height: 200px;
+}
+
+.opponent-life-points {
+  width: 60%;
+  text-align: center;
+}
+
+.opponent-deck-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 70%;
+}
+
+#card-back {
+  width: 150px;
+  height: 195px;
+}
+
+.center {
+  /* background-image: url(../images/game-background.jpg); */
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  height: 250px;
+  margin: 4%;
+}
+
+.opponent-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 49%;
+
+}
+
+.user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 49%;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  width: 90%;
+  margin-top: 3%;
+}
+
+#attackButton, #defendButton {
+  font-size: 25px;
+  margin: 3%;
+  background-color: #CAA229;
+  border: none;
+}
+
+.user-life-points {
+  width: 60%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-life-points p, .opponent-life-points p {
+  font-size: 25px;
+}
+
+.user-deck-container {
+  width: 70%;
+  position: relative
+}
+
+.user-carousel-container {
+  position: absolute;
+  top: 64%;
+  left: 45%;
+  overflow: hidden;
+  padding: 10px;
+  width: 50%;
+}
+
+.user-carousel {
+  padding: 0 3vw;
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.user-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.user-card-container {
+  flex: 0 0 auto;
+  width: 202px;
+  height: 303px;
+}
+
+.user-card-container:hover {
+  transform: scale(1.5);
 }
 
 /* homepage logo */

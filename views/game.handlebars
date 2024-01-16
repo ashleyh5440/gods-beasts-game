@@ -1,41 +1,63 @@
 <section class="game-screen">
-    <section class="opponent">
-        <div class="opponent-life-points">
-          <p>Life points<br>
-          </p>
-        </div>
-        <div class="opponent-deck-container">
-          <div>
-            <img id="card-back" src="./assets/images/card-back.jpg">
-          </div>
-        </div>
-    </section>
+  <section class="opponent">
+    <div class="opponent-life-points">
+      <p>Life points<br>
+      {{!-- generated life points --}} </p>
+    </div>
+    <div class="opponent-deck-container">
+      <div>
+        {{!-- <img id="card-back" src="./assets/images/card-back.jpg"> --}}
+      </div>
+    </div>
+  </section>
 
-    <section class="center">
-        <div class="opponent-card">
+  <section class="center">
+    <div class="opponent-card">
+      {{!-- generated card --}}
+    </div>
 
-        </div>
-        <div class="user-card">
-          
-        </div>
+    <div class="user-card">    
+      {{!-- generated card --}}
+    </div>
+  </section>
 
-    </section>
-
-    <section class="user">
+  <section class="user">
         <div class="user-life-points">
           <p>Life points<br>
-          </p>
-
+          {{!-- generated life points --}} </p>
           <div class="button-container hidden">
             <button type="button" class="btn btn-primary" id="attackButton">Attack</button>
             <button type="button" class="btn btn-primary" id="defendButton">Defend</button>
           </div>
-
         </div>
         <div class="user-deck-container">
-          <div class="user-deck">
-            
+          <div class="row1">
+            <div class="card">
+            </div>
+            <div class="card">
+            </div>
+            <div class="card">
+            </div>
+            <div class="card">
+            </div>
+            <div class="card">
+            </div>
           </div>
+          <div class="row2">
+            <div class="card">
+            </div>
+            <div class="card">
+            </div>
+            <div class="card">
+            </div>
+            <div class="card">
+            </div>
+            <div class="card">
+            </div>
+          </div>      
         </div>
-    </section>
+      </section>
+ 
 </section>
+
+<script src="/js/game.js"></script>
