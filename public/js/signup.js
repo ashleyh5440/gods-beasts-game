@@ -1,15 +1,14 @@
 // function to sign-up
-async function signupFormHandler(event) {
-    event.preventDefault();
-  
-    const username = document.querySelector("#exampleInputUsername1").value.trim();
-    const email = document.querySelector("#exampleInputEmail1").value.trim();
-    const password = document.querySelector("#exampleInputPassword1").value.trim();
-  
-    if (username && email && password) {
-        // Send a POST request to the API endpoint
+const signupFormHandler = async (event) => {
+  event.preventDefault();
+
+  const username = document.querySelector("#exampleInputUsername1").value.trim();
+  const email = document.querySelector("#exampleInputEmail1").value.trim();
+  const password = document.querySelector("#exampleInputPassword1").value.trim();
+  if (username && email && password) {
+    // Send a POST request to the API endpoint
       const response = await fetch("/api/users", {
-        method: "post",
+        method: "POST",
         body: JSON.stringify({
           username,
           email,
@@ -21,13 +20,14 @@ async function signupFormHandler(event) {
         // If successful, redirect the browser to the profile page
         alert("Account created! Logging you in now.");
         document.location.replace("/dashboard");
+        console.log(response)
       } else {
         alert(response.statusText);
       }
     }
-  }
   
-  document
-    .querySelector(".form-group")
-    .addEventListener("submit", signupFormHandler);
-  
+}
+
+document
+  .getElementById('signup-form')
+  .addEventListener("submit", signupFormHandler);
