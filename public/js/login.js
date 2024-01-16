@@ -26,5 +26,5 @@ async function loginFormHandler(event) {
   }
   
   document
-    .querySelector(".form-group")
+    .querySelector("#login-form")
     .addEventListener("submit", loginFormHandler);
