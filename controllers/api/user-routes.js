@@ -12,7 +12,8 @@ router.post('/login', async(req, res) => {
             res.status(400).json({message: 'Email or password is incorrect.'});
             return;
         }
-        if (userData.password !== req.body.password) {
+        const validPassword = await userData.checkPassword(req.body.password);
+        if (!validPassword) {
             res.status(400).json({ message: 'Password is incorrect.'});
             return;
         }

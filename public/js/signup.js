@@ -19,7 +19,7 @@ const signupFormHandler = async (event) => {
       if (response.ok) {
         // If successful, redirect the browser to the profile page
         alert("Account created! Logging you in now.");
-        document.location.replace("/dashboard");
+        document.location.replace("/");
         console.log(response)
       } else {
         alert(response.statusText);
