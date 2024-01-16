@@ -37,25 +37,25 @@ router.get('/createdeck', async (req, res) => {
 });
 
 // for user's deck
-// router.get('/userdeck', async (req, res) => {
-//   try {
-//     // Get all cardss and JOIN with user data
-//     const userDeck = await Deck.findAll({});
+router.get('/userdeck', async (req, res) => {
+  try {
+    // Get all cardss and JOIN with user data
+    const userDeck = await Deck.findAll({});
 
-//     // Serialize data so the template can read it
-//     const cards = cardChoices.map((card) => card.get({ plain: true }));
+    // Serialize data so the template can read it
+    const cards = cardChoices.map((card) => card.get({ plain: true }));
 
-//     // Pass serialized   data and session flag into template
-//     res.render('userdeck', { 
-//       cards, 
-//       logged_in: req.session.logged_in 
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
+    // Pass serialized   data and session flag into template
+    res.render('userdeck', { 
+      cards, 
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 
-//     res.render('log_sign');
-// });
+    res.render('log_sign');
+});
 
 
 
