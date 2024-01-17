@@ -35,6 +35,21 @@ User.init(
                 len: [8],
             },
         },
+        highScore: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            defaultValue: 0,
+        },
+        wins: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            defaultValue: 0,
+        },
+        losses: {
+            type: DataTypes.INTEGER, 
+            allowNull: true,
+            defaultValue: 0,
+        },
     },
     {
         hooks: {

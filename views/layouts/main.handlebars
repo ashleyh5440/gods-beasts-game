@@ -17,9 +17,10 @@
             <h1>Gods and Beasts</h1>
         </div>
         <div class="nav-buttons">
-            <button type="button" class="btn btn-primary" id="home-button">Home</button>
+            <a href="/">
+                <button type="button" class="btn btn-primary" id="home-button">Home</button>
+            </a>
             {{!-- <button type="button" class="btn btn-primary" id="account-button">Acccount</button> --}}
-            <button type="button" class="btn btn-primary" id="deck-button">My deck</button>
             {{#if loggedIn}}
             <button class="btn btn-primary" id="logout">Logout</button>
             {{/if}}
@@ -30,4 +31,5 @@
     </main>
 </body>
 <script src="./js/logout.js"></script>
+
 </html>

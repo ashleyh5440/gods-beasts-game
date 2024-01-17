@@ -7,9 +7,7 @@ const Character = require('./Character');
 //     foreignKey: 'deck_id',
 // })
 
-User.hasOne(Deck {
 
-})
 
 
 module.exports = { Character, Deck, User };
