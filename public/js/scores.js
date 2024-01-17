@@ -19,6 +19,9 @@ app.post('saveScores', async (req, res)=>{
         res.status(500).send('Internal Server Error')
     }
 });
+const highScoreHandler = async(event) => {
+    event.preventDefault();
+}
 
 app.get('/loadScores/:username', async (req, res)=>{
     const username = req.params.username;
