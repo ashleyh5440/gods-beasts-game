@@ -1,6 +1,8 @@
 // Do we need to make a table to intake the scores?-HP
-//i think below is for a scores route -HP
-
+// i think below is for a scores route -HP
+const highScoreHandler = async(event) => {
+    event.preventDefault();
+}
 
 app.get('/loadScores/:username', async (req, res)=>{
     const username = req.params.username;
@@ -17,3 +19,4 @@ app.get('/loadScores/:username', async (req, res)=>{
         res.status(500).send('Internal Server Error')
     }
 })
+
