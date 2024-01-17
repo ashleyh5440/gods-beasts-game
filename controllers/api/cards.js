@@ -4,22 +4,29 @@ const { Character, User } = require('../models');
 
 router.get('/cards', async (req, res) => {
   try {
-    cards = []
 
-    numCards = 10
+    const shuffleArray = (array) => {
+        return array.sort(()=> Math.random()- 10)
+    }
+    //fetch the cards
+    const cards = await Character.findAll();
+
+    //shuffle the cards
+    const shuffledCards = shuffleArray(cards);
+
     // computer chooses 10 card for user
-    let userCards = Math.floor(math.random()* numCards)
-    //computer chooses 10 cards for computer
-    let computeCards = 
+    const userCards = shuffledCards.slice(0, 10);
 
-    // Pass serialized data and session flag into template
-    res.render('createdeck', { 
-      cards, 
-      logged_in: req.session.logged_in 
-    });
-  } catch (err) {
-    res.status(500).json(err);
+    //computer chooses 10 cards for computer
+    const computerCards = shuffledCards.slice(0, 10);
+
+    res.json({userCards, computerCards});
+  
+  }catch (error){
+    console.error(error);
+    res.status(500).json({error: 'Internal Server Error'})
   }
 });
+   
 
 module.exports = router;
