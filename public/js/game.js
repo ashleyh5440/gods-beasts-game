@@ -28,8 +28,9 @@ let choseDefend = {
     'defend2': 850};
 //api call to pull datasbase numers
 async function getAttackDefendPoints () {
-  characterData = await fetch("/api/characters", {
+  characterData = await fetch("/api/cards", {
         method: 'GET',
+        headers: {'Content-Type': 'application/json'},
     })
 ///save where you need 
 };
