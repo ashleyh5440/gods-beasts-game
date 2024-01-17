@@ -1,15 +1,19 @@
  <section class="god-carousel-container">
-      <h2>Gods</h2>
+      <h2>Characters</h2>
       <!-- arrow buttons -->
         <button class="pre-btn"><img src="/images/arrow.png"/></button>
         <button class="nxt-btn"><img src="/images/arrow.png"/></button>
 
-        <!-- put event listener on container for all cards for the add button -->
         <div class="carousel">
             {{#each cards as |card|}}
             {{> god-card}}
             {{/each}}
         </div>
 </section>
+<section class="play-btn-container">
+    <a href="/play">
+        <button type="button" class="btn btn-primary btn-lg" id="new-game-btn">Play</button>
+    </a>
+</section>
 
-    <script src="/js/createdeck.js"></script>
+<script src="/js/createdeck.js"></script>

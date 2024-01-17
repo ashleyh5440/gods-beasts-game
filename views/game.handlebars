@@ -1,30 +1,57 @@
 <section class="game-screen">
+  
   <section class="opponent">
-    <div class="opponent-life-points">
-      <p>Life points<br>
-      {{!-- generated life points --}} </p>
-    </div>
-    <div class="opponent-deck-container">
-      <div>
-        {{!-- <img id="card-back" src="./assets/images/card-back.jpg"> --}}
-      </div>
-    </div>
-  </section>
+        <div class="opponent-life-points">
+          <p>Life points<br>
+          10,000</p>
+        </div>
+        <div class="opponent-deck-container">
+          <div>
+            <!-- <img id="card-back" src="./assets/images/card-back.jpg"> -->
+            <div class="god-card-mini hidden">
+              <div class="card-content">
+                <div class="name-class">
+                  <h3>Bastet</h3>
+                </div>
+                <div class="points-mini">
+                  <p>Attack: 660<br>
+                  Defend: 800</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <section class="center">
-    <div class="opponent-card">
-      {{!-- generated card --}}
-    </div>
+      <section class="center">
+        <div class="opponent-card">
 
-    <div class="user-card">    
-      {{!-- generated card --}}
-    </div>
-  </section>
+        </div>
+        <div class="user-card">
+          
+          <!-- <div class="god-card">
+            <div class="card-content">
+              <div class="name-class">
+                <p>Bastet<p>
+              </div>
+              <div class="card-image-container">
+                <img class="card-image" src="./assets/images/bastet.jpg">
+              </div>
+              <div class="points">
+                Attack: 660<br>
+                Defend: 800</p>
+              </div>
+            </div>   
+          </div> -->
+        
+        </div>
 
-  <section class="user">
+      </section>
+
+      <section class="user">
         <div class="user-life-points">
           <p>Life points<br>
-          {{!-- generated life points --}} </p>
+          10,000</p>
           <div class="button-container hidden">
             <button type="button" class="btn btn-primary" id="attackButton">Attack</button>
             <button type="button" class="btn btn-primary" id="defendButton">Defend</button>
@@ -32,27 +59,28 @@
         </div>
         <div class="user-deck-container">
           <div class="row1">
-            <div class="card">
+            <div class="card card-mini" id="card1">
             </div>
-            <div class="card">
+
+            <div class="card card-mini" id="card2">
             </div>
-            <div class="card">
+            <div class="card card-mini" id="card3">
             </div>
-            <div class="card">
+            <div class="card card-mini" id="card4">
             </div>
-            <div class="card">
+            <div class="card card-mini" id="card5">
             </div>
           </div>
           <div class="row2">
-            <div class="card">
+            <div class="card card-mini" id="card6">
             </div>
-            <div class="card">
+            <div class="card card-mini" id="card7">
             </div>
-            <div class="card">
+            <div class="card card-mini" id="card8">
             </div>
-            <div class="card">
+            <div class="card card-mini" id="card9">
             </div>
-            <div class="card">
+            <div class="card card-mini " id="card10">
             </div>
           </div>      
         </div>

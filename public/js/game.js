@@ -53,29 +53,23 @@ document.addEventListener('DOMContentLoaded', function () {
     // .catch(error)
     //     console.log('Error:', error);
      
-
-    //select the god-card
-    console.log('click');
-    let godCard = document.getElementById('god-card');
-
-    godCard.addEventListener('click', function () {
-        moveCard(godCard);
-        console.log('god card');
-    });
-
-    //select the beast-card
-    let beastCard = document.getElementById('beast-card');
-
-    beastCard.addEventListener('click', function () {
-        moveCard(beastCard);
-        console.log('beast card');
-    });
+    //select a card
+    let cards = document.querySelector('[id^=card]')
+ 
+    for(let i = 0; i < cards.length; i++) {
+        cards[i].addEventListener('click', () => {
+            moveCard(cards[i]);
+            console.log('god card');
+            let computerCardChoice = cards[i].querySelector(".card-mini");
+            moveComputerCard(computerCardChoice)
+        });
+}
 
     //move card to the center
     function moveCard(card) {
-        const centerSection = document.querySelector('.center');
+        const userCardSection = document.querySelector('.user-card'); //move the card to the user-card div
         // centerSection.innerHTML = ''; //clear the center section
-        centerSection.appendChild(card.cloneNode(true)); //append a clone of the card
+        userCardSection.appendChild(card.cloneNode(true)); //append a clone of the card
         console.log('before hidden class');
         //show the attack and defend buttons
         document.querySelector('.button-container').classList.remove('hidden')
@@ -85,15 +79,52 @@ document.addEventListener('DOMContentLoaded', function () {
             userCardPlay('attack');
             });
         };
-
-        document.getElementById('defendButton').addEventListener('click', function() {
-            userCardPlay('defend');
-        });
 });
-//after moving card
+document.getElementById('defendButton').addEventListener('click', function() {
+    userCardPlay('defend');
+    const opponentCardSection = document.querySelector('.opponent-card'); //move the card to the opponent-card div
+    computerCardChoice = document.querySelector('.god-card-mini')
+    // centerSection.innerHTML = ''; //clear the center section
+    let card = computerCardChoice
+    console.log(card)
+
+    let cardClone = card.cloneNode(true)
+    console.log(cardClone)
+
+    opponentCardSection.appendChild(cardClone); //append a clone of the card
+    // opponentCardSection.classList.remove('hidden')
+    cardClone.classList.remove('hidden')
+});
+
+function moveComputerCard(computerCardChoice) {
+    const opponentCardSection = document.querySelector('.opponent-card'); //move the card to the opponent-card div
+    computerCardChoice = document.querySelector('.god-card-mini')
+    // centerSection.innerHTML = ''; //clear the center section
+    let card = computerCardChoice
+    console.log(card)
+
+    let cardClone = card.cloneNode(true)
+    console.log(cardClone)
+
+    opponentCardSection.appendChild(cardClone); //append a clone of the card
+    console.log('before hidden class');
+    //show the attack and defend buttons
+    document.querySelector('.button-container').classList.remove('hidden')
+    console.log('after hidden class');
+    //add event listenters for each card
+    document.querySelector('#attackButton').addEventListener('click', function (){
+        userCardPlay('attack');
+        cardClone.classList.remove('hidden');
+        });
+    };    
 
 //user plays attack or defense from that card
 const userCardPlay = async (choice) => {
+    //check the game state
+    if(gameState !== 'userTurn'){
+        console.log('its not your turn.');
+        return;
+    }
 
     userChoice = choice;
 
@@ -104,14 +135,9 @@ const userCardPlay = async (choice) => {
             const userAttackPoints = choseAttack['attack1'];
             if(typeof userAttackPoints === 'number'){
                 console.log(userAttackPoints);
-                //  change gameState to the computer
-                // await computerCardPlay();
-                const computerValues = await computerCardPlay();
-                console.log(computerValues);
-                //calculation for computer //computer returns here 
-                 return battle({userChoice, userAttackPoints, ...computerValues});  
-
-                // computerAttackPoints, computerDefendPoints
+                gameState = 'computerTurn'; //change gameState to the computer
+                computerCardPlay();
+                await battle({userChoice, userAttackPoints});  
             };  
         } else {
             console.log('Invalid attack point.');
@@ -123,24 +149,31 @@ const userCardPlay = async (choice) => {
             const userDefendPoints = choseDefend['defend1'];
             if(typeof userDefendPoints === 'number'){
                 console.log(userDefendPoints);
-                // gameState = 'computerTurn'; //change gameState to the computer
-                const computerValues = await computerCardPlay();
-                console.log(computerValues);
-                return battle({userChoice, userDefendPoints, ...computerValues});
-            }; 
-            // computerAttackPoints, computerDefendPoints
+                gameState = 'computerTurn'; //change gameState to the computer
+                computerCardPlay();
+                await battle({userChoice, userDefendPoints});
+            };
         } else {
             console.log("Invalid defend choice.");
         }
     }
+
+    if (userPickCards !== 0) {
+        computerTurnPromise = computerCardPlay();
+        await computerTurnPromise;
+    };
+    gameState = 'computerTurn';  // change game state to computer turn.                 
+    // }else {
+        // console.log('You have run out of cards. Game over!');//if the user runs out of cards the game is over
+        //     // endGame();
 };
 
-function moveComputerCard(computerCardChoice){
-    const centerSection = document.querySelector('.center');
-    const card = document.createElement('div');
-    card.className = computerCardChoice;
-    centerSection.appendChild(card)
-};
+// function moveComputerCard(computerCardChoice){
+//     const centerSection = document.querySelector('.center');
+//     const card = document.createElement('div');
+//     card.className = computerCardChoice;
+//     centerSection.appendChild(card)
+// };
 
 //computer plays a card
 const computerCardPlay = async () => {
