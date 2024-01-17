@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 router.get('/', async(req, res) => {
-    res.render('homepage', { loggedIn: req.session.loggedIn });
+    res.render('homepage', { loggedIn: req.session.loggedIn, currentUser });
 });
 
 router.get('/login', async(req, res) => {
@@ -80,7 +80,7 @@ router.get('/play', async(req, res) => {
 })
 
 router.get('/viewscores', async(req, res) => {
-  res.render('scores');
+  res.render('scores', { user: req.cookies.userData });
 })
 
 module.exports = router;

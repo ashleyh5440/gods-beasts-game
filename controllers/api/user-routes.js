@@ -52,6 +52,26 @@ router.post('/', async(req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
-})
+});
+router.post('/savescores', async (req, res)=>{
+    const {username, wins, losses, ties} = req.body;
+
+    try{
+        let score = await Score.findOne({username});
+
+        if(!score){
+            score = new Score ({username, wins, losses, ties});
+        }else{
+            score.wins = wins;
+            score.losses = losses;
+            score.ties = ties;
+        }
+        await score.save();
+        res.send('Scores saved Successfully!');
+    }catch(error){
+        console.error(error);
+        res.status(500).send('Internal Server Error')
+    }
+});
 
 module.exports = router;
