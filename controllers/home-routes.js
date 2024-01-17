@@ -80,7 +80,7 @@ router.get('/play', async(req, res) => {
 })
 
 router.get('/viewscores', async(req, res) => {
-  res.render('scores');
+  res.render('scores', { user: req.cookies.userData });
 })
 
 module.exports = router;

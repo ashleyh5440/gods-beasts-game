@@ -91,5 +91,20 @@ router.put("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
+router.get("/", async (req, res) => {
+  try {
+    const userData = await User.findOne(
+      {
+        where: {
+          id: req.session.userId,
+        },
+      }
+    );
+    res.status(200).json(userData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;

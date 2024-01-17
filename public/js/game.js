@@ -396,6 +396,7 @@ const loadScores = async () => {
             console.log('Scores loaded:', data);
             //update
             wins = data.wins;
+            losses = data.losses;
             highScore = data.highScore;
         }else{
             console.error('Failed to load scores');
