@@ -1,5 +1,5 @@
 // Do we need to make a table to intake the scores?-HP
-//i think below is for a scores route -HP
+// i think below is for a scores route -HP
 app.post('saveScores', async (req, res)=>{
     const {username, wins, losses, ties} = req.body;
 
@@ -36,3 +36,4 @@ app.get('/loadScores/:username', async (req, res)=>{
         res.status(500).send('Internal Server Error')
     }
 })
+
