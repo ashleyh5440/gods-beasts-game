@@ -59,8 +59,8 @@ router.get('/play', async(req, res) => {
     res.render('game');
 })
 
-router.get('/viewscores', async(req, res) => {
-  res.render('scores', { user: req.cookies.userData });
+router.get('/scores', async(req, res) => {
+  res.render('scores', { user: req.session.userId });
 })
 
 module.exports = router;
