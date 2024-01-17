@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // .catch(error)
     //     console.log('Error:', error);
      
-
     //select the god-card
     console.log('click');
     let godCard = document.getElementById('god-card');
