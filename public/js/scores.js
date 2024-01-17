@@ -6,11 +6,11 @@ app.post('saveScores', async (req, res)=>{
         let score = await Score.findOne({username});
 
         if(!score){
-            score = new Score ({username, wins, losses, ties});
+            score = new Score ({username, wins, losses, highScore});
         }else{
             score.wins = wins;
             score.losses = losses;
-            score.ties = ties;
+            score.ties = highScore;
         }
         await score.save();
         res.send('Scores saved Successfully!');

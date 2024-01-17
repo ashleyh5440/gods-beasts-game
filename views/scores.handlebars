@@ -7,7 +7,30 @@
                  <h1>Your top scores</h1>
               </div>
               {{!-- fetch method with get /api/users --}}
+  <script>
+    const loadScores = async () => {
+      try {
+        const response = await fetch(`/api/users`);
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Scores loaded:', data);
+          // Update scores or variables (wins, losses, highScore)
+          wins = data.wins;
+          losses = data.losses;
+          highScore = data.highScore;
+        } else {
+          console.error('Failed to load scores');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    // Call the loadScores function
+    loadScores();
+  </script>
             </div>
           </div>
 
 <script src="./js/scores.js"></script>
+<script src="./js/game.js"></script>
