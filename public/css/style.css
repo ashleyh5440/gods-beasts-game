@@ -8,6 +8,10 @@ a {
     display: inline-block;
   }
 
+p {
+  color: white;
+}
+
 .homepage-layout {
     display: flex;
     flex-direction: column;

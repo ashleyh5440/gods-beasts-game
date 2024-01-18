@@ -3,6 +3,9 @@
 // read the JSON file synchronously
 // const characterData = JSON.parse(fs.readFileSync('path/to/character-seeds.json', 'utf8' ));
 
+// const userCards = require('/api/cards');
+// const cards = import {userCards, computerCards};
+
 //tally wins, loses and ties
 let wins = 0;
 let ties = 0;
@@ -12,46 +15,96 @@ let losses = 0;
 let userLifePoints = 10000;
 let computerLifePoints = 10000;
 
-let userPickCards = 10;
-let computerPickCards = 10;
+// let userPickCards = 10;
+// let computerPickCards = 10;
 
 let characterData = []
 
 //  card attack points
 let choseAttack = {
-    'attack1': 800,
-    'attack2': 650 };
+    'attack': []}; //object or array?
 
 //card defend points
 let choseDefend = {
-    'defend1': 200, 
-    'defend2': 850};
-//api call to pull datasbase numers
-async function getAttackDefendPoints () {
-  characterData = await fetch("/api/characters", {
-        method: 'GET',
-    })
-///save where you need 
+    'defend': []};
+
+//api call to pull defense points from cards
+async function getDefensePoints() {
+    try {
+        const response = await fetch("/api/cards", {
+            method: 'GET',
+            headers: {'Content-Type':'application/json'},
+        });
+
+        if (response.ok) {
+            const dataDefense = await response.json();
+            return dataDefense;
+        } else {
+            console.error('Failed to fetch points');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function fetchDefenseData() {
+    try {
+        characterData = await getDefensePoints();
+        if (characterData){
+            console.log('Fetched data');
+        } else {
+            console.log('Failed to fetch data')
+        }
+    } catch(err) {
+        console.error('error', err);
+    }
+}
+
+fetchDefenseData()
+
+getDefensePoints();
+
+//api call to pull attack points from cards
+  async function getAttackPoints() {
+    try {
+        const response = await fetch("/api/cards", {
+            method: 'GET',
+        });
+
+        if (response.ok) {
+            const dataAttack = await response.json();
+            return dataAttack;
+        } else {
+            console.error('Failed to fetch points');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 };
 
-getAttackDefendPoints();
-// (use this for server -characterData.map(character => character.defend_points);)
+//   function to save data
+async function fetchAttackData() {
+    try {
+        characterData = await getAttackPoints();
+        if (characterData){
+            console.log('Fetched data');
+        } else {
+            console.log('Failed to fetch data');
+        }
+    } catch(err) {
+        console.error('error', err);
+    }
+}
 
+fetchAttackData()
+
+getAttackPoints();
 
 //define a game state variable
 let gameState = 'userTurn';
 
-let computerTurnPromise = null//added a variable to store the promise.
-
 //user selects a god or beast card
 document.addEventListener('DOMContentLoaded', function () {
-    // loadScores();
-    //fetch the JSON data
-    // fetch('path/to/seeds/character-seeds.json',    //when ready for server change to GET method
-    // .then(response => response.json())
-    // .then((data) => data)
-    // .catch(error)
-    //     console.log('Error:', error);
      
     //select a card
     let cards = document.querySelector('[id^=card]')
@@ -59,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
     for(let i = 0; i < cards.length; i++) {
         cards[i].addEventListener('click', () => {
             moveCard(cards[i]);
-            console.log('god card');
+            console.log('moved card');
             let computerCardChoice = cards[i].querySelector(".card-mini");
             moveComputerCard(computerCardChoice)
         });
@@ -80,10 +133,11 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         };
 });
+
 document.getElementById('defendButton').addEventListener('click', function() {
     userCardPlay('defend');
     const opponentCardSection = document.querySelector('.opponent-card'); //move the card to the opponent-card div
-    computerCardChoice = document.querySelector('.god-card-mini')
+    computerCardChoice = document.querySelector('.card-mini')
     // centerSection.innerHTML = ''; //clear the center section
     let card = computerCardChoice
     console.log(card)
@@ -98,7 +152,7 @@ document.getElementById('defendButton').addEventListener('click', function() {
 
 function moveComputerCard(computerCardChoice) {
     const opponentCardSection = document.querySelector('.opponent-card'); //move the card to the opponent-card div
-    computerCardChoice = document.querySelector('.god-card-mini')
+    computerCardChoice = document.querySelector('card-mini')
     // centerSection.innerHTML = ''; //clear the center section
     let card = computerCardChoice
     console.log(card)
@@ -131,8 +185,8 @@ const userCardPlay = async (choice) => {
     if (userChoice === 'attack') {
         console.log('You chose to attack!');
         // check if userChoice is a valid attack option
-        if (choseAttack.hasOwnProperty('attack1')){
-            const userAttackPoints = choseAttack['attack1'];
+        if (choseAttack.hasOwnProperty('attack')){
+            const userAttackPoints = choseAttack['attack'];
             if(typeof userAttackPoints === 'number'){
                 console.log(userAttackPoints);
                 gameState = 'computerTurn'; //change gameState to the computer
@@ -145,8 +199,8 @@ const userCardPlay = async (choice) => {
     }else if (userChoice === 'defend') {
     console.log('You chose defend!');
         //check if userChoice is a valid defend option
-        if(choseDefend.hasOwnProperty('defend1')){
-            const userDefendPoints = choseDefend['defend1'];
+        if(choseDefend.hasOwnProperty('defend')){
+            const userDefendPoints = choseDefend['defend'];
             if(typeof userDefendPoints === 'number'){
                 console.log(userDefendPoints);
                 gameState = 'computerTurn'; //change gameState to the computer
@@ -167,13 +221,6 @@ const userCardPlay = async (choice) => {
         // console.log('You have run out of cards. Game over!');//if the user runs out of cards the game is over
         //     // endGame();
 };
-
-// function moveComputerCard(computerCardChoice){
-//     const centerSection = document.querySelector('.center');
-//     const card = document.createElement('div');
-//     card.className = computerCardChoice;
-//     centerSection.appendChild(card)
-// };
 
 //computer plays a card
 const computerCardPlay = async () => {
