@@ -3,33 +3,42 @@
     <div class="col" id="col1">
       <img src="images/logo.png" alt="Gods and Beasts" width="500" height="600">
     </div>
-    <div class="col" id="col2">
+    <div class="col" id="col-9">
       <h1>Your top scores</h1>
-    </div>
+      <br>
     {{!-- fetch method with get /api/users --}}
+    <script>
+      async function getHighScores() {
+        try {
+          var response = await fetch("/api/users/getuser", { //returns Promise object with all the content hidden inside it?
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          });
+          if (response.ok) {
+            var data = await response.json();
+            console.log(data);
+
+            var column = document.querySelector("#col-9")
+            var scoretext = document.createElement('p');
+            var winstext = document.createElement('p');
+            var losstext = document.createElement('p');
+
+
+            scoretext.textContent = ' High Score: ' + data.highScore;
+            winstext.textContent = ' Wins: ' + data.wins;
+            losstext.textContent = ' Losses: ' + data.losses;
+
+            column.append(scoretext, winstext, losstext);
+          } else {
+            console.error('Failed to fetch high scores');
+          }
+        } catch (error) {
+          console.error('Error fetching high scores:', error);
+        }
+      }
+
+      getHighScores();
+    </script>
   </div>
 </div>
-<script>
-  async function getHighScores() {
-    var response = await fetch("/api/users/getuser", { //returns Promise object with all the content hidden inside it?
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
-    if (response.ok) {
-      response = response.json(); 
-      console.log(response);
-    }
-    var column = document.querySelector("#col2")
-    var scoretext = document.createElement('p');
-    var winstext = document.createElement('p');
-    var losstext = document.createElement('p');
-    scoretext.textContent = 'High Score goes here';
-    winstext.textContent = "Wins go here";
-    losstext.textContent = "Losses go here";
-    column.append(scoretext, winstext, losstext);
-  }
-  getHighScores();
-</script>
-
-{{!--
-<script src="./js/scores.js"></script> --}}
+</div>
