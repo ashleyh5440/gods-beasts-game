@@ -20,77 +20,81 @@ let computerLifePoints = 10000;
 
 let characterData = []
 
-//  card attack points
+//  user card points
 let userAttack = 0
 let userDefend = 0
 
+//  computer card points
+let computerAttack = 0
+let computerDefend = 0
+
 //api call to pull defense points from cards
-async function getDefensePoints() {
-    try {
-        const response = await fetch("/api/cards", {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        });
+// async function getDefensePoints() {
+//     try {
+//         const response = await fetch("/api/cards", {
+//             method: 'GET',
+//             headers: { 'Content-Type': 'application/json' },
+//         });
 
-        if (response.ok) {
-            const dataDefense = await response.json();
-            return dataDefense;
-        } else {
-            console.error('Failed to fetch points');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+//         if (response.ok) {
+//             const dataDefense = await response.json();
+//             return dataDefense;
+//         } else {
+//             console.error('Failed to fetch points');
+//         }
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// }
 
-async function fetchDefenseData() {
-    try {
-        characterData = await getDefensePoints();
-        if (characterData) {
-            console.log('Fetched data');
-        } else {
-            console.log('Failed to fetch data')
-        }
-    } catch (err) {
-        console.error('error', err);
-    }
-}
+// async function fetchDefenseData() {
+//     try {
+//         characterData = await getDefensePoints();
+//         if (characterData) {
+//             console.log('Fetched data');
+//         } else {
+//             console.log('Failed to fetch data')
+//         }
+//     } catch (err) {
+//         console.error('error', err);
+//     }
+// }
 
 // await fetchDefenseData();
 
 // await getDefensePoints();
 
 //api call to pull attack points from cards
-async function getAttackPoints() {
-    try {
-        const response = await fetch("/api/cards", {
-            method: 'GET',
-        });
+// async function getAttackPoints() {
+//     try {
+//         const response = await fetch("/api/cards", {
+//             method: 'GET',
+//         });
 
-        if (response.ok) {
-            const dataAttack = await response.json();
-            return dataAttack;
-        } else {
-            console.error('Failed to fetch points');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-};
+//         if (response.ok) {
+//             const dataAttack = await response.json();
+//             return dataAttack;
+//         } else {
+//             console.error('Failed to fetch points');
+//         }
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// };
 
-//   function to save data
-async function fetchAttackData() {
-    try {
-        characterData = await getAttackPoints();
-        if (characterData) {
-            console.log('Fetched data');
-        } else {
-            console.log('Failed to fetch data');
-        }
-    } catch (err) {
-        console.error('error', err);
-    }
-}
+// //   function to save data
+// async function fetchAttackData() {
+//     try {
+//         characterData = await getAttackPoints();
+//         if (characterData) {
+//             console.log('Fetched data');
+//         } else {
+//             console.log('Failed to fetch data');
+//         }
+//     } catch (err) {
+//         console.error('error', err);
+//     }
+// }
 
 // await fetchAttackData();
 
@@ -104,6 +108,7 @@ document.querySelector(".user-deck-container").addEventListener('click', (e) => 
         const elid = el.closest(".user-card").id
         console.log(elid)
         const card = document.getElementById(elid)
+        // start here!!
         userAttack = 
         moveCard(card);
         console.log('moved card');
