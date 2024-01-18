@@ -1,5 +1,6 @@
 # gods-beasts-game
 [Link to application](link)
+![Application screenshot](/public/images/G&B%20screenshot.png)  
 
 ## Description
 This application is a CMS-style website, where users can play an online card game against the computer. This app follows the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.  
@@ -17,3 +18,5 @@ Hannah P.
 Mathilde A.  
 
 ## Credits
+[Boostrap](https://getbootstrap.com/docs/5.3/layout/columns/)  
+[Bootcampspot](https://bootcampspot.instructure.com/courses/4347/assignments/62284?module_item_id=1082215)  
