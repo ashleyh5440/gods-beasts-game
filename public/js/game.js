@@ -28,80 +28,82 @@ let userDefend = 0;
 let computerAttack = 0;
 let computerDefend = 0;
 
-//api call to pull defense points from cards
-// async function getDefensePoints() {
-//     try {
-//         const response = await fetch("/api/cards", {
-//             method: 'GET',
-//             headers: { 'Content-Type': 'application/json' },
-//         });
+// api call to pull defense points from cards
+async function getDefensePoints() {
+    try {
+        const response = await fetch("/api/cards", {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        });
 
-//         if (response.ok) {
-//             const dataDefense = await response.json();
-//             return dataDefense;
-//         } else {
-//             console.error('Failed to fetch points');
-//         }
-//     } catch (error) {
-//         console.error('Error:', error);
-//     }
-// }
+        if (response.ok) {
+            const dataDefense = await response.json();
+            return dataDefense;
+        } else {
+            console.error('Failed to fetch points');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
 
-// async function fetchDefenseData() {
-//     try {
-//         characterData = await getDefensePoints();
-//         if (characterData) {
-//             console.log('Fetched data');
-//         } else {
-//             console.log('Failed to fetch data')
-//         }
-//     } catch (err) {
-//         console.error('error', err);
-//     }
-// }
+async function fetchDefenseData() {
+    try {
+        characterData = await getDefensePoints();
+        if (characterData) {
+            console.log('Fetched data');
+        } else {
+            console.log('Failed to fetch data')
+        }
+    } catch (err) {
+        console.error('error', err);
+    }
+}
 
-// await fetchDefenseData();
+fetchDefenseData();
 
-// await getDefensePoints();
+getDefensePoints();
 
-//api call to pull attack points from cards
-// async function getAttackPoints() {
-//     try {
-//         const response = await fetch("/api/cards", {
-//             method: 'GET',
-//         });
+// api call to pull attack points from cards
+async function getAttackPoints() {
+    try {
+        const response = await fetch("/api/cards", {
+            method: 'GET',
+        });
 
-//         if (response.ok) {
-//             const dataAttack = await response.json();
-//             return dataAttack;
-//         } else {
-//             console.error('Failed to fetch points');
-//         }
-//     } catch (error) {
-//         console.error('Error:', error);
-//     }
-// };
+        if (response.ok) {
+            const dataAttack = await response.json();
+            return dataAttack;
+        } else {
+            console.error('Failed to fetch points');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
 
-// //   function to save data
-// async function fetchAttackData() {
-//     try {
-//         characterData = await getAttackPoints();
-//         if (characterData) {
-//             console.log('Fetched data');
-//         } else {
-//             console.log('Failed to fetch data');
-//         }
-//     } catch (err) {
-//         console.error('error', err);
-//     }
-// }
+//   function to save data
+async function fetchAttackData() {
+    try {
+        characterData = await getAttackPoints();
+        if (characterData) {
+            console.log('Fetched data');
+        } else {
+            console.log('Failed to fetch data');
+        }
+    } catch (err) {
+        console.error('error', err);
+    }
+}
 
-// await fetchAttackData();
+fetchAttackData();
 
-// await getAttackPoints();
+getAttackPoints();
 
 //define a game state variable
 let gameState = 'userTurn';
+
+let userChoice;
 
 document.querySelector(".user-deck-container").addEventListener('click',async(e) => {
         const el = e.target
@@ -112,9 +114,12 @@ document.querySelector(".user-deck-container").addEventListener('click',async(e)
 
         moveCard(card);
 
-        let userChoice = choice;
-        //if the user chooses attack, take the attack points
         let userAttack; 
+        let userDefend;
+
+        
+        //if the user chooses attack, take the attack points
+
         if(userChoice === 'attack'){
             userAttack = userChoice.attack_points;
             console.log('You chose to attack!');
@@ -123,17 +128,16 @@ document.querySelector(".user-deck-container").addEventListener('click',async(e)
         };
         
         //if the user chooses defend, take the defend points
-        let userDefend;
+      
         if(userChoice === 'defend'){
             userDefend = userChoice.defense_points;
             console.log('You chose defend!');
         } else{console.log('No defend points :(')
         };
 
-     
         console.log('moved card');
         moveComputerCard()
-        await battle({userAttack, userDefend, computerActionChoice})
+        await battle({userAttack, userDefend})
     }
 );
 
@@ -153,24 +157,29 @@ document.querySelector(".user-deck-container").addEventListener('click',async(e)
 //         });
 // }
 
+//attach and defend buttons
+// console.log('after hidden class');
+//add event listenters for each card
+document.querySelector('.button-container').addEventListener('click', function () {
+    userChoice = 'attack';
+    });
+
+
+document.getElementById('defendButton').addEventListener('click', function () {
+       userChoice = 'defend'
+});
+
+
 //move card to the center
 function moveCard(card) {
     const userCardSection = document.querySelector('.user-card'); //move the card to the user-card div
     // centerSection.innerHTML = ''; //clear the center section
     userCardSection.appendChild(card.cloneNode(true)); //append a clone of the card
     console.log('before hidden class');
-    //show the attack and defend buttons
-    document.querySelector('.button-container').classList.remove('hidden')
-    console.log('after hidden class');
-    //add event listenters for each card
-    document.querySelector('.button-container').addEventListener('click', function () {
-        userCardPlay('attack');
-    });
+
 };
 // });
 
-document.getElementById('defendButton').addEventListener('click', function () {
-    userCardPlay('defend');
     // const opponentCardSection = document.querySelector('.opponent-card'); //move the card to the opponent-card div
     // computerCardChoice = document.querySelector('.card-mini')
     // // centerSection.innerHTML = ''; //clear the center section
@@ -183,7 +192,7 @@ document.getElementById('defendButton').addEventListener('click', function () {
     // opponentCardSection.appendChild(cardClone); //append a clone of the card
     // opponentCardSection.classList.remove('hidden')
     // document.querySelector(".computer-card").classList.remove('hidden')
-});
+
 
 function moveComputerCard() {
     // const opponentCardSection = document.querySelector('.opponent-card'); //move the card to the opponent-card div
@@ -202,7 +211,7 @@ function moveComputerCard() {
     console.log('after hidden class');
     //add event listenters for each card
     document.querySelector('#attackButton').addEventListener('click', function () {
-        userCardPlay('attack');
+        computerCardPlay('attack');
         // document.querySelector(".computer-card").classList.remove('hidden');
     });
 };
