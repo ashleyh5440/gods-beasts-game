@@ -126,6 +126,7 @@ document.querySelector(".user-deck-container").addEventListener('click',async(e)
     }
 );
 
+
 //winning and losing sounds
 //<audio id="winSound" src="path/to/public/sound-bites/YouWin-soundEffect.mp3"/>"
 const userWins = () => {
@@ -170,10 +171,10 @@ const resetGame = () => {
 };
 
 //battle logic
-//**************** */ -- userAttack replaces userAttackPoints???
-const battle = async ({ userChoice,userAttack, computerAttack, computerDefend, computerChoice}) => {
+const battle = async ({ userChoice,userAttack, computerAttack, computerDefend}) => {
 
     console.log(userAttack);
+    console.log(userAttack.attack_points)
     console.log(userDefend);
     console.log(userChoice)
     console.log(computerAttack);
@@ -181,18 +182,12 @@ const battle = async ({ userChoice,userAttack, computerAttack, computerDefend, c
   
     console.log('user vs computer time!')
 
-    //convert values to numbers
-    // userAttackPoints = parseInt(userAttackPoints);
-    // userDefendPoints = parseInt(userDefendPoints);
-    // computerAttackPoints = parseInt(computerAttackPoints);
-    // computerDefendPoints = parseInt(computerDefendPoints);
-
     let roundWin = 'draw';
 
-    if (typeof computerAttack === "undefined") {
-        // console.log('computer is attacking');
-        if (typeof userAttack === 'undefined') {
-            console.log('user is defending & computer is defendig')//calculation
+    if ( computerAttack === "undefined") {
+        if (userAttack === 'undefined') {
+
+            console.log('user & computer is defending') //do calculation here 
             if (userDefend === computerDefend) {
                 roundWin = 'draw';
             } else if (userDefend > computerDefend) {
@@ -201,9 +196,11 @@ const battle = async ({ userChoice,userAttack, computerAttack, computerDefend, c
             } else {
                 computerLifePoints += userDefend;
                 roundWin = 'computer'
-            }
-        } else {
-            console.log('user is defending & computer is attacking')//check
+            };
+
+            
+        }else {
+            console.log('user is defending, computer is attacking')//calculation
             if (userDefend === computerAttack) {
                 roundWin = 'draw';
             }
@@ -213,12 +210,12 @@ const battle = async ({ userChoice,userAttack, computerAttack, computerDefend, c
             } else {
                 userDefend -= userLifePoints;
                 roundWin = 'computer'
-            }
+            };
         }
     } else {
         // console.log('computer is defending');
-        if (typeof userDefend === 'undefined') {
-            console.log('user is attacking, computer is defending')//calculation
+        if (userDefend === 'undefined') {
+            console.log('user is attacking & computer is defending')//check
             if (userAttack === computerDefend) {
                 roundWin = 'draw';
             } else if (userAttack > computerDefend) {
@@ -227,12 +224,10 @@ const battle = async ({ userChoice,userAttack, computerAttack, computerDefend, c
             } else {
                 userLifePoints -= userAttack / 2;
                 roundWin = 'computer'
-            }
+            };
         }
-
         else {
-            console.log('user & computer is attacking') //do calculation here 
-
+            console.log('user is attacking & computer is attacking')//calculation
             if (userAttack === computerAttack) {
                 roundWin = 'draw';
             }
@@ -262,15 +257,19 @@ const battle = async ({ userChoice,userAttack, computerAttack, computerDefend, c
 
     if (roundWin === 'user') {
         wins++
+        document.querySelector(".user-points").innerHTML = wins;
         userWins();
         endBattleRound();
     };
 
     if (roundWin === 'computer') {
         losses++
+        document.querySelector(".computer-points").innerHTML = losses;
         userLoses();
         endBattleRound();
     };
+
+    
 
     //display final scores
     console.log(`Wins: ${wins}, Ties: ${ties}, Losses: ${losses}`);
@@ -278,7 +277,6 @@ const battle = async ({ userChoice,userAttack, computerAttack, computerDefend, c
     // gameState = 'userTurn';//change game state to the user for the next round
 
 };
-
 
 
 //attach and defend buttons
@@ -290,16 +288,17 @@ document.getElementById('attackButton').addEventListener('click', async function
     //user
     userChoice = 'attack';
     if(userChoice === 'attack'){
-        userAttack = await getAttackPoints();
+        userAttack = (await getAttackPoints()).attack_points;
         console.log('You chose to attack!');
         console.log(userAttack);
     }else{
         console.log('No attack points :(');
     };
     //computer
+    moveComputerCard();
     computerChoice ='attack';
     if(computerChoice === 'attack'){
-        computerAttack = await getAttackPoints();
+        computerAttack = (await getAttackPoints()).attack_points;
      console.log('Computer chose to attack!');
      console.log(computerAttack);
     }else{
@@ -312,16 +311,17 @@ document.getElementById('attackButton').addEventListener('click', async function
 document.getElementById('defendButton').addEventListener('click', async function () {
     userChoice = 'defend';
     if(userChoice === 'defend'){
-    userDefend = await getDefensePoints();
+    userDefend = (await getDefensePoints()).defense_points;
     console.log('You chose defend!');
     console.log(userDefend);
     } else{console.log('No defend points :(')
     }; 
     // await battle({userChoice, userDefend});
      //computer
+     moveComputerCard();
      computerChoice ='defend';
      if(computerChoice === 'defend'){
-         computerAttack = await getAttackPoints();
+         computerAttack = (await getAttackPoints()).defense_points;
       console.log('Computer chose to defend!');
       console.log(computerDefend)
      }else{
@@ -347,9 +347,9 @@ const getNewComputerCard = async() => {
     </div>
   </div>`
   document.querySelector(".opponent-card").innerHTML = html
-}
+};
 
-
+getNewComputerCard();
 
 const saveScores = async (wins, losses, highScore) => {
     const scores = {
