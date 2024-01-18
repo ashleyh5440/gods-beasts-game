@@ -15,6 +15,22 @@ router.get('/login', async(req, res) => {
 // for createdeck page
 const { Character, User, Deck } = require('../models');
 // const withAuth = require('../utils/auth');
+router.get('/createdeck', async (req, res) => {
+  try {
+    const cardChoices = await Character.findAll({});
+
+    const cards = cardChoices.map((card) => card.get({plain: true}));
+
+    res.render('createdeck', {
+      cards,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
+  res.render('log_sign');
+})
 
 // for user's deck
 router.get('/userdeck', async (req, res) => {
