@@ -23,9 +23,9 @@
     var scoretext = document.createElement('p');
     var winstext = document.createElement('p');
     var losstext = document.createElement('p');
-    scoretext.textContent = response.highScore;
-    winstext.textContent = response.wins;
-    losstext.textContent = response.losses;
+    scoretext.textContent = 'High Score goes here';
+    winstext.textContent = "Wins go here";
+    losstext.textContent = "Losses go here";
     column.append(scoretext, winstext, losstext);
   }
   getHighScores();
