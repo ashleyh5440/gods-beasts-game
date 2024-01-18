@@ -38,7 +38,6 @@ router.get('/userdeck', async (req, res) => {
 });
 
 
-
 router.get('/returninguser', async(req, res) => {
     res.render('login');
 })
@@ -56,7 +55,27 @@ router.get('/options', async(req, res) => {
 })
 
 router.get('/play', async(req, res) => {
-    res.render('game');
+  try {
+    const shuffleArray = (array) => {
+      return array.sort(()=> Math.random() + 10)
+  }
+  //fetch the cards
+  const cardData = await Character.findAll();
+  const cards = cardData.map(c => c.get({plain:true}))
+  const computerCard = cards[Math.floor(Math.random()*cards.length)]
+  //shuffle the cards
+  const shuffledCards = shuffleArray(cards);
+
+  // computer chooses 10 card for user
+  const userCards = shuffledCards.slice(0, 10);
+
+  //computer chooses 10 cards for computer
+  console.log("userCards", userCards)
+    res.render('game', {computerCard, userCards});
+  } catch (error) {
+    console.log(error.message)
+    res.status(500).json(error)
+  }
 })
 
 router.get('/scores', async(req, res) => {
