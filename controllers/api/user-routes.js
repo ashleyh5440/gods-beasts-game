@@ -91,7 +91,7 @@ router.put("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-router.get("/", async (req, res) => {
+router.get("/getuser", async (req, res) => {
   try {
     const userData = await User.findOne(
       {
