@@ -10,7 +10,7 @@ app.post('saveScores', async (req, res)=>{
         }else{
             score.wins = wins;
             score.losses = losses;
-            score.ties = highScore;
+            score.highScore = highScore;
         }
         await score.save();
         res.send('Scores saved Successfully!');
