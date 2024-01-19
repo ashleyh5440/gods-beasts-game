@@ -21,5 +21,11 @@ Mathilde A.
 [Boostrap](https://getbootstrap.com/docs/5.3/layout/columns/)  
 [Bootcampspot](https://bootcampspot.instructure.com/courses/4347/assignments/62284?module_item_id=1082215)  
 
+## Collaborators
+- Zion Griffin: https://github.com/griff1nz   
+- Hannah Price: https://github.com/Hannahphoto   
+- Mathilde: https://github.com/mathilde-01   
+- Ashley Hill: https://github.com/ashleyh5440
+
 ## Deployed Application
 https://gods-and-beasts-game-15c8c3fec868.herokuapp.com/
