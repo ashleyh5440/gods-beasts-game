@@ -20,3 +20,6 @@ Mathilde A.
 ## Credits
 [Boostrap](https://getbootstrap.com/docs/5.3/layout/columns/)  
 [Bootcampspot](https://bootcampspot.instructure.com/courses/4347/assignments/62284?module_item_id=1082215)  
+
+## Deployed Application
+https://gods-and-beasts-game-15c8c3fec868.herokuapp.com/
