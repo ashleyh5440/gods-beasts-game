@@ -113,6 +113,7 @@ function moveComputerCard() {
 let gameState = 'userTurn';
 
 document.querySelector(".user-deck-container").addEventListener('click',async(e) => {
+        
         const el = e.target
         const elid = el.closest(".user-card").id
         console.log(elid)
@@ -121,30 +122,40 @@ document.querySelector(".user-deck-container").addEventListener('click',async(e)
 
         moveCard(card);
         console.log('moved card');
-        
+        getNewComputerCard();
         moveComputerCard();
     }
 );
 
 
-//winning and losing sounds
-//<audio id="winSound" src="path/to/public/sound-bites/YouWin-soundEffect.mp3"/>"
+// winning and loosing sounds
+
 const userWins = () => {
-    // const winSound = document.getElementById('windSound');
-    // winSound.play();
+    playWinSound();
     window.alert("You win!")
 };
 
-//<audio id="loseSound" src="path/to/public/sound-bites/Defeat-soundEffect.mp3"/>
+const winSound = new Audio('./sound-bites/YouWin-SoundEffect.mp3');
+
+const playWinSound = () =>{
+    winSound.play();
+};
+// loosing sound
 const userLoses = () => {
-    // const loseSound = document.getElementById('loseSound');
-    // loseSound.play();
+    playLoseSound();
     window.alert("You lost!")
+};
+
+const loseSound = new Audio('./sound-bites/Defeat-SoundEffect.mp3');
+
+const playLoseSound = () => {
+    loseSound.play();
 };
 
 const promptUserTurn = () => {
     window.alert("Its your turn!")
 };
+
 
 //end game
 const endGame = () => {
@@ -166,12 +177,11 @@ const resetGame = () => {
     wins = 0;
     ties = 0;
     losses = 0;
-    // gameState = 'userTurn';  // change game state to user turn.
-    // saveScores();
+    saveScores();
 };
 
 //battle logic
-const battle = async ({ userChoice,userAttack, computerAttack, computerDefend}) => {
+const battle = async ({userChoice,userAttack, computerAttack, computerDefend}) => {
 
     console.log(userAttack);
     console.log(userAttack.attack_points)
@@ -186,7 +196,6 @@ const battle = async ({ userChoice,userAttack, computerAttack, computerDefend}) 
 
     if ( computerAttack === "undefined") {
         if (userAttack === 'undefined') {
-
             console.log('user & computer is defending') //do calculation here 
             if (userDefend === computerDefend) {
                 roundWin = 'draw';
@@ -244,13 +253,13 @@ const battle = async ({ userChoice,userAttack, computerAttack, computerDefend}) 
     //check for losers
     if (userLifePoints <= 0) {
         console.log('You have died');
-        userLoses();
+        // userLoses();
         endGame();
         return;
     };
     if (computerLifePoints <= 0) {
         console.log('The computer has died');
-        userWins();
+        // userWins();
         endGame();
         return;
     };
@@ -273,17 +282,14 @@ const battle = async ({ userChoice,userAttack, computerAttack, computerDefend}) 
 
     //display final scores
     console.log(`Wins: ${wins}, Ties: ${ties}, Losses: ${losses}`);
-    // saveScores(wins, ties, losses);
-    // gameState = 'userTurn';//change game state to the user for the next round
-
 };
 
 
 //attach and defend buttons
 let userChoice = [];
         
-//if the user chooses attack, take the attack points
 
+//if the user/computer chooses attack, take the attack points
 document.getElementById('attackButton').addEventListener('click', async function () {
     //user
     userChoice = 'attack';
@@ -307,7 +313,7 @@ document.getElementById('attackButton').addEventListener('click', async function
     return battle({userAttack, userDefend, computerAttack, computerDefend})
 });
 
-//if the user chooses defend, take the defend points
+//if the user/computer chooses defend, take the defend points
 document.getElementById('defendButton').addEventListener('click', async function () {
     userChoice = 'defend';
     if(userChoice === 'defend'){
@@ -396,32 +402,3 @@ const loadScores = async () => {
 };
 
 
-
-// logic for if both user and computer attack. if points are the same its a draw
-//     compare attacks points
-// if (userAttackPoints === '800' && computerAttackPoints === '650') {
-//     console.log('You')
-//     userWins();
-//     wins++
-//     userLifePoints += computerAttackPoints;
-// }
-// if (userAttackPoints === '800' && computerDefendPoints === '850') {
-//     console.log('You lose!');
-//     userLoses();
-//     losses++
-//     userLifePoints -= userAttackPoints / 2;
-// }
-
- // came from moveComuterCard ---
-//  const opponentCardSection = document.querySelector('.opponent-card'); //move the card to the opponent-card div
-    // computerCardChoice = document.querySelector('card-mini')
-    // // centerSection.innerHTML = ''; //clear the center section
-    // let card = computerCardChoice
-    // console.log(card)
-
-    // let cardClone = card.cloneNode(true)
-    // console.log(cardClone)
-
-    // opponentCardSection.appendChild(cardClone); //append a clone of the card
-    // console.log('before hidden class');
-    //show the attack and defend buttons
