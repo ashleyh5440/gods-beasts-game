@@ -1,3 +1,5 @@
+// const { Character } = require("../../models");
+
 //tally wins, loses and ties
 let wins = 0;
 let ties = 0;
@@ -16,6 +18,34 @@ let userDefend = 0;
 //  computer card points
 let computerAttack = 0;
 let computerDefend = 0;
+
+// user get a new set of 10 cards
+// async function getNewTen(){
+//     try{
+        
+//         const response = await fetch('/play',{
+//             method: 'GET',
+//             headers: {'Content-Type': 'application/json'}
+//         });
+//         if(response.ok){
+//             const cardData = await Character.findAll(); /// *******this may need to be changed
+//             const cards = cardData.map(c=> c.get({plain:true}));
+//             //shuffle cards
+//             const shuffledCards = shuffleArray(cards);
+//             //computer chooses 10 cards for user
+//             const userCards = shuffledCards.slice(0,10);
+//             res.render('game', {userCards});
+//         }}catch (error){
+//             console.log(error.message)
+//             res.status(500).json(error)
+//         }
+
+// };
+
+// //button for user to get a new set of 10 cards
+// document.querySelector('get-new-10').addEventListener('click', async function (){
+//     getNewTen();
+// });
 
 // api call to pull defense points from cards
 async function getDefensePoints() {
@@ -400,5 +430,6 @@ const loadScores = async () => {
         console.error('Error:', error);
     }
 };
+
 
 
