@@ -327,7 +327,7 @@ document.getElementById('defendButton').addEventListener('click', async function
      moveComputerCard();
      computerChoice ='defend';
      if(computerChoice === 'defend'){
-         computerAttack = (await getAttackPoints()).defense_points;
+         computerDefend = (await getDefensePoints()).defense_points;
       console.log('Computer chose to defend!');
       console.log(computerDefend)
      }else{
