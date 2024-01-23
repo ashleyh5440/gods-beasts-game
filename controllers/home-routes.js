@@ -71,23 +71,29 @@ router.get('/options', async(req, res) => {
 })
 
 router.get('/play', async(req, res) => {
-  try {
+  try { //swap function
     const shuffleArray = (array) => {
-      return array.sort(()=> Math.random() + 10)
+    for (let i = array.length-1; i > 0; i--) {
+      let j = Math.floor(Math.random()*i)
+      let temp = array[i]
+      array[i] = array[j] 
+      array[j] = temp
+      //shuffles cards
+    }
+    return array
   }
   //fetch the cards
   const cardData = await Character.findAll();
   const cards = cardData.map(c => c.get({plain:true}))
-  const computerCard = cards[Math.floor(Math.random()*cards.length)]
   //shuffle the cards
   const shuffledCards = shuffleArray(cards);
-
+  console.log(shuffledCards)
   // computer chooses 10 card for user
   const userCards = shuffledCards.slice(0, 10);
 
   //computer chooses 10 cards for computer
   console.log("userCards", userCards)
-    res.render('game', {computerCard, userCards});
+    res.render('game', {userCards});
   } catch (error) {
     console.log(error.message)
     res.status(500).json(error)

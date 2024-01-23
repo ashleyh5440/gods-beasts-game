@@ -35,7 +35,7 @@ User.init(
                 len: [8],
             },
         },
-        highScore: {
+        highScore: { //life points
             type: DataTypes.INTEGER,
             allowNull: true,
             defaultValue: 0,

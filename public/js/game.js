@@ -1,204 +1,275 @@
-// const { Character } = require("../../models");
+// user has 10 cards
+let numCards = 10;
 
 //tally wins, loses and ties
 let wins = 0;
 let ties = 0;
 let losses = 0;
 
+// final score
+// let finalScore = userLifePoints
+
 //each player begins with 10000 life points!
 let userLifePoints = 10000;
 let computerLifePoints = 10000;
 
-let characterData = []
+// game over screen headers
+let youWon = "You win";
+let youLose = "Defeat";
 
-//  user card points
-let userAttack = 0;
-let userDefend = 0;
+//show the user the life points
+document.querySelector('.opponent-life-points p').textContent = computerLifePoints
+document.querySelector('.user-life-points p').textContent = userLifePoints
+document.querySelector('.win').textContent = wins
+document.querySelector('.losses').textContent = losses
+document.querySelector('.ties').textContent = ties
 
-//  computer card points
-let computerAttack = 0;
-let computerDefend = 0;
+// For each card in play, get the attack and defend points
+let userAttack;
+let userDefend;
 
-// user get a new set of 10 cards
-// async function getNewTen(){
-//     try{
-        
-//         const response = await fetch('/play',{
-//             method: 'GET',
-//             headers: {'Content-Type': 'application/json'}
-//         });
-//         if(response.ok){
-//             const cardData = await Character.findAll(); /// *******this may need to be changed
-//             const cards = cardData.map(c=> c.get({plain:true}));
-//             //shuffle cards
-//             const shuffledCards = shuffleArray(cards);
-//             //computer chooses 10 cards for user
-//             const userCards = shuffledCards.slice(0,10);
-//             res.render('game', {userCards});
-//         }}catch (error){
-//             console.log(error.message)
-//             res.status(500).json(error)
-//         }
+let compAttack;
+let compDefend;
 
-// };
 
-// //button for user to get a new set of 10 cards
-// document.querySelector('get-new-10').addEventListener('click', async function (){
-//     getNewTen();
-// });
+document.querySelector(".user-deck-container").addEventListener('click', userPickCard)
+function userPickCard(e) {
+    const elid = e.target.closest(".user-card").id
+    const card = document.getElementById(elid)
 
-// api call to pull defense points from cards
-async function getDefensePoints() {
-    try {
-        const response = await fetch("/api/cards", {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        });
-
-        if (response.ok) {
-            const dataDefense = await response.json();
-            return dataDefense;
-        } else {
-            console.error('Failed to fetch points');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
+    document.querySelector(".user-deck-container").removeEventListener("click", userPickCard)
+    userAttack = card.querySelectorAll('.points-mini p')[0].dataset.attack;
+    userDefend = card.querySelectorAll('.points-mini p')[1].dataset.defense
+    console.log('user card points', userAttack, userDefend);
+    addAttackDefendListener()
+    moveCard(card);
+    // remove the old card from the DOM
+    card.remove()
+    showAttackDefendBtns()
 }
 
-async function fetchDefenseData() {
-    try {
-        characterData = await getDefensePoints();
-        if (characterData) {
-            console.log('Fetched data');
-        } else {
-            console.log('Failed to fetch data')
-        }
-    } catch (err) {
-        console.error('error', err);
-    }
-}
-
-fetchDefenseData();
-
-getDefensePoints();
-
-// api call to pull attack points from cards
-async function getAttackPoints() {
-    try {
-        const response = await fetch("/api/cards", {
-            method: 'GET',
-        });
-
-        if (response.ok) {
-            const dataAttack = await response.json();
-            return dataAttack;
-        } else {
-            console.error('Failed to fetch points');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-};
-
-//   function to save data
-async function fetchAttackData() {
-    try {
-        characterData = await getAttackPoints();
-        if (characterData) {
-            console.log('Fetched data');
-        } else {
-            console.log('Failed to fetch data');
-        }
-    } catch (err) {
-        console.error('error', err);
-    }
-}
-
-fetchAttackData();
-
-getAttackPoints();
-
-//move user card to the center
+//move card to the center
 function moveCard(card) {
     const userCardSection = document.querySelector('.user-card'); //move the card to the user-card div
-    // centerSection.innerHTML = ''; //clear the center section
     userCardSection.appendChild(card.cloneNode(true)); //append a clone of the card
-    console.log('before hidden class');
-};
-
-//computer moves card
-function moveComputerCard() {
-   
+    //show the attack and defend buttons
     document.querySelector('.button-container').classList.remove('hidden')
-    console.log('after hidden class');
-    //add event listenters for each card
-    document.querySelector('#attackButton').addEventListener('click', function () {
-        // computerChooseAction('attack');
-        // document.querySelector(".computer-card").classList.remove('hidden');
-    });
+
 };
 
-//define a game state variable
-let gameState = 'userTurn';
+const addAttackDefendListener = () => {
+    console.log("attack-defend listener back on");
+    document.getElementById('defendButton').addEventListener('click', defend);
+    document.querySelector('#attackButton').addEventListener('click', attack);
+}
 
-document.querySelector(".user-deck-container").addEventListener('click',async(e) => {
+const attack = async () => {
+    await getNewComputerCard()
+    userCardPlay("attack")
+    removeAttackDefendListener()
+}
+const defend = async () => {
+    await getNewComputerCard()
+    userCardPlay("defend")
+    removeAttackDefendListener()
+}
+
+const removeAttackDefendListener = () => {
+
+    document.getElementById('defendButton').removeEventListener('click', defend);
+    document.querySelector('#attackButton').removeEventListener('click', attack);
+}
+
+function showAttackDefendBtns() {
+    document.querySelector('.button-container').classList.remove('hidden')
+
+};
+
+//user plays attack or defense from that card
+const userCardPlay = (userChoice) => {
+
+    numCards--;
+    console.log("numcards", numCards);
+    //TODO THIS CODE NEEDS REFACTORING FOR VERBOSITY and NOT DRY
+
+    const computerActionChoice = Math.random() < 0.5 ? 'attack2' : 'defend2';
+    console.log('computer chose to:', computerActionChoice);
+
+            // user attacks, computer attacks
+    if (userChoice === 'attack') {
+        console.log('You chose to attack!');
+        console.log("your attack points:", userAttack)
         
-        const el = e.target
-        const elid = el.closest(".user-card").id
-        console.log(elid)
-        const card = document.getElementById(elid)
-        // start here!!
+        if (computerActionChoice === 'attack2') {
+            if (userAttack > compAttack) {
+                wins++
 
-        moveCard(card);
-        console.log('moved card');
-        getNewComputerCard();
-        moveComputerCard();
+                computerLifePoints -= userAttack 
+                console.log(typeof userLifePoints, typeof compAttack)
+               userLifePoints += compAttack; //i added this
+                document.querySelector('.opponent-life-points p').textContent = computerLifePoints
+                document.querySelector('.user-life-points p').textContent = userLifePoints
+
+            } else if (userAttack === compAttack) {
+                ties++
+                console.log("you tie")
+            } else { //userAttack < compAttack
+                losses++
+                console.log("you lose")
+                userLifePoints -= compAttack
+                computerLifePoints = parseInt(computerLifePoints) + parseInt(userAttack); //i added this
+                document.querySelector('.opponent-life-points p').textContent = computerLifePoints
+                document.querySelector('.user-life-points p').textContent = userLifePoints
+
+            }
+            // user attacks, computer defends
+        } else if (computerActionChoice === "defend2") {
+
+            if (userAttack > compDefend) {
+                wins++
+                console.log("you win");
+                computerLifePoints -= userAttack
+                document.querySelector('.opponent-life-points p').textContent = computerLifePoints
+                document.querySelector('.user-life-points p').textContent = userLifePoints
+                
+            } else if (userAttack === compDefend) {
+                ties++
+                console.log("you tie")
+            } else { //userAttack < compDefend
+                losses++
+                console.log("you lose")
+                userLifePoints -= Math.floor(userAttack / 2); //i added this
+                document.querySelector('.opponent-life-points p').textContent = computerLifePoints
+                document.querySelector('.user-life-points p').textContent = userLifePoints
+
+            }
+
+        }
+        //user defends, computer attacks
+    } else if (userChoice === 'defend') {
+        console.log('You chose defend!');
+        if (computerActionChoice === 'attack2') {
+
+            if (userDefend > compAttack) {
+                wins++
+                console.log("you win");
+                // computerLifePoints -= userDefend
+                computerLifePoints -= Math.floor(compAttack / 2); //i added this
+                document.querySelector('.opponent-life-points p').textContent = computerLifePoints
+                document.querySelector('.user-life-points p').textContent = userLifePoints
+
+            } else if (userDefend === compAttack) {
+                ties++
+                console.log("you tie")
+            } else { //userDefend < compAttack
+                losses++
+                console.log("you lose")
+                userLifePoints -= compAttack
+                document.querySelector('.opponent-life-points p').textContent = computerLifePoints
+                document.querySelector('.user-life-points p').textContent = userLifePoints
+
+            }
+            //computer defends, user defends
+            //if both choose defend, i think it should be a tie/retreat
+        } else if (computerActionChoice === "defend2") {
+
+            if (userChoice === 'defend' )
+
+            if (userDefend > compDefend) {
+                wins++
+                console.log("you win");
+                computerLifePoints -= userDefend
+                document.querySelector('.opponent-life-points p').textContent = computerLifePoints
+                document.querySelector('.user-life-points p').textContent = userLifePoints
+
+            } else if (userDefend === compDefend) {
+                ties++
+                console.log("you tie")
+            } else { //userDefend > compDefend
+                losses++
+                console.log("you lose")
+                userLifePoints -= compDefend
+                document.querySelector('.opponent-life-points p').textContent = computerLifePoints
+                document.querySelector('.user-life-points p').textContent = userLifePoints
+
+            }
+        }
+
     }
-);
 
+    setTimeout(() => {
+        document.querySelector(".user-deck-container").addEventListener('click', userPickCard)
+        document.querySelector(".user-card").innerHTML = ""
+        document.querySelector(".opponent-card").innerHTML = ""
+        checkGameStatus()
 
-// winning and loosing sounds
+    }, 3000)
+    document.querySelector('.win').textContent = wins
+    document.querySelector('.losses').textContent = losses
+    document.querySelector('.ties').textContent = ties
 
-const userWins = () => {
-    playWinSound();
-    window.alert("You win!")
-};
-
-const winSound = new Audio('./sound-bites/YouWin-SoundEffect.mp3');
-
-const playWinSound = () =>{
-    winSound.play();
-};
-// loosing sound
-const userLoses = () => {
-    playLoseSound();
-    window.alert("You lost!")
-};
-
-const loseSound = new Audio('./sound-bites/Defeat-SoundEffect.mp3');
-
-const playLoseSound = () => {
-    loseSound.play();
-};
-
-const promptUserTurn = () => {
-    window.alert("Its your turn!")
 };
 
 
-//end game
-const endGame = () => {
-    console.log('Game over!');
-    resetGame();
-};
+const getNewComputerCard = async () => {
+    return new Promise(async (resolve, reject) => {
+        const cardData = await fetch("/api/cards")
+        const computerCard = await cardData.json()
+        if (cardData.ok) {
 
-//end battle round
-const endBattleRound = () => {
-    console.log('End round');
-    gameState = 'userTurn'
-    promptUserTurn();
-};
+            compAttack = computerCard.attack_points;
+            compDefend = computerCard.defense_points
+
+            const html = ` <div class="card-mini computer-card" id="${computerCard.id}">
+            <div class="god-card-mini card-mini">
+            <div class="card-content">
+            <div class="name-class">
+              <h3>${computerCard.name}</h3>
+            </div>
+            <div class="points-mini">
+            <p id="comp-attack" data-attack="${computerCard.attack_points}">Attack: ${computerCard.attack_points}</p>
+            <p id="comp-defend" data-defense="${computerCard.defense_points}">Defend: ${computerCard.defense_points}</p>
+            </div>
+            </div>
+            </div>
+            </div>`
+            document.querySelector(".opponent-card").innerHTML = html
+            resolve()
+        } else {
+            reject()
+        }
+    })
+
+}
+    // game status
+function checkGameStatus() {
+    if (userLifePoints <= 0) {
+        document.getElementById("lose-sound").play();
+        alert("game over. you lose")
+    }else if (computerLifePoints <= 0) {
+        document.getElementById("win-sound").play();
+        alert("game over, you won!!")
+    } else if (numCards === 0 && userLifePoints > computerLifePoints) {
+        document.getElementById("win-sound").play();
+        alert("game over, you win!!")
+    } else if (numCards === 0 && userLifePoints < computerLifePoints) {
+        document.getElementById("lose-sound").play();
+        alert("game over, lose")
+    }
+}
+
+//game over screen
+// const gameOverScreen = `<section class="game-over hidden">
+// <br>
+// <h2 style="font-family: 'Italianno', cursive;"id= "game-over-heading">${}</h2>
+// <h3 style="font-family: inherit;">Game Over</h3>
+// <p>${finalScore}</p> 
+// <button type="button" class="btn btn-primary" id="game-screen-new-game">New Game</button>
+// <a href="/">
+// <button type="button" class="btn btn-primary" id="game-screen-home">Home</button>
+// </a>
+// </section>`
+
 
 //reset game
 const resetGame = () => {
@@ -207,185 +278,9 @@ const resetGame = () => {
     wins = 0;
     ties = 0;
     losses = 0;
-    saveScores();
+    // gameState = 'userTurn';  // change game state to user turn.
+    // saveScores();
 };
-
-//battle logic
-const battle = async ({userChoice,userAttack, computerAttack, computerDefend}) => {
-
-    console.log(userAttack);
-    console.log(userAttack.attack_points)
-    console.log(userDefend);
-    console.log(userChoice)
-    console.log(computerAttack);
-    console.log(computerDefend);
-  
-    console.log('user vs computer time!')
-
-    let roundWin = 'draw';
-
-    if ( computerAttack === "undefined") {
-        if (userAttack === 'undefined') {
-            console.log('user & computer is defending') //do calculation here 
-            if (userDefend === computerDefend) {
-                roundWin = 'draw';
-            } else if (userDefend > computerDefend) {
-                userLifePoints += computerDefend
-                roundWin = 'user';
-            } else {
-                computerLifePoints += userDefend;
-                roundWin = 'computer'
-            };
-
-            
-        }else {
-            console.log('user is defending, computer is attacking')//calculation
-            if (userDefend === computerAttack) {
-                roundWin = 'draw';
-            }
-            else if (userDefend > computerAttack) {
-                computerLifePoints -= computerAttack / 2;
-                roundWin = 'user';
-            } else {
-                userDefend -= userLifePoints;
-                roundWin = 'computer'
-            };
-        }
-    } else {
-        // console.log('computer is defending');
-        if (userDefend === 'undefined') {
-            console.log('user is attacking & computer is defending')//check
-            if (userAttack === computerDefend) {
-                roundWin = 'draw';
-            } else if (userAttack > computerDefend) {
-                userLifePoints += computerDefend;
-                roundWin = 'user';
-            } else {
-                userLifePoints -= userAttack / 2;
-                roundWin = 'computer'
-            };
-        }
-        else {
-            console.log('user is attacking & computer is attacking')//calculation
-            if (userAttack === computerAttack) {
-                roundWin = 'draw';
-            }
-            else if (userAttack > computerAttack) {
-                userLifePoints += computerAttack
-                roundWin = 'user';
-            } else {
-                computerLifePoints += userAttack;
-                roundWin = 'computer'
-            }
-        }
-    };
-
-    //check for losers
-    if (userLifePoints <= 0) {
-        console.log('You have died');
-        // userLoses();
-        endGame();
-        return;
-    };
-    if (computerLifePoints <= 0) {
-        console.log('The computer has died');
-        // userWins();
-        endGame();
-        return;
-    };
-
-    if (roundWin === 'user') {
-        wins++
-        document.querySelector(".user-points").innerHTML = wins;
-        userWins();
-        endBattleRound();
-    };
-
-    if (roundWin === 'computer') {
-        losses++
-        document.querySelector(".computer-points").innerHTML = losses;
-        userLoses();
-        endBattleRound();
-    };
-
-    
-
-    //display final scores
-    console.log(`Wins: ${wins}, Ties: ${ties}, Losses: ${losses}`);
-};
-
-
-//attach and defend buttons
-let userChoice = [];
-        
-
-//if the user/computer chooses attack, take the attack points
-document.getElementById('attackButton').addEventListener('click', async function () {
-    //user
-    userChoice = 'attack';
-    if(userChoice === 'attack'){
-        userAttack = (await getAttackPoints()).attack_points;
-        console.log('You chose to attack!');
-        console.log(userAttack);
-    }else{
-        console.log('No attack points :(');
-    };
-    //computer
-    moveComputerCard();
-    computerChoice ='attack';
-    if(computerChoice === 'attack'){
-        computerAttack = (await getAttackPoints()).attack_points;
-     console.log('Computer chose to attack!');
-     console.log(computerAttack);
-    }else{
-    console.log('No attack points for Computer :(');
-    }
-    return battle({userAttack, userDefend, computerAttack, computerDefend})
-});
-
-//if the user/computer chooses defend, take the defend points
-document.getElementById('defendButton').addEventListener('click', async function () {
-    userChoice = 'defend';
-    if(userChoice === 'defend'){
-    userDefend = (await getDefensePoints()).defense_points;
-    console.log('You chose defend!');
-    console.log(userDefend);
-    } else{console.log('No defend points :(')
-    }; 
-    // await battle({userChoice, userDefend});
-     //computer
-     moveComputerCard();
-     computerChoice ='defend';
-     if(computerChoice === 'defend'){
-         computerDefend = (await getDefensePoints()).defense_points;
-      console.log('Computer chose to defend!');
-      console.log(computerDefend)
-     }else{
-     console.log('No defend points for Computer :(');
-     }
-     return battle({userAttack, userDefend, computerAttack, computerDefend})
-});
-
-const getNewComputerCard = async() => {
-    const cardData = await fetch("/api/cards")
-    const computerCard = await cardData.json()
-    const html = ` <div class="card-mini computer-card" id="${computerCard.id}">
-    <div class="god-card-mini card-mini">
-      <div class="card-content">
-        <div class="name-class">
-          <h3>${computerCard.name}</h3>
-        </div>
-        <div class="points-mini">
-          <p>Attack: ${computerCard.attack_points}<br>
-          Defend: ${computerCard.defense_points}</p>
-        </div>
-      </div>
-    </div>
-  </div>`
-  document.querySelector(".opponent-card").innerHTML = html
-};
-
-getNewComputerCard();
 
 const saveScores = async (wins, losses, highScore) => {
     const scores = {
@@ -431,5 +326,4 @@ const loadScores = async () => {
     }
 };
 
-
-
+addAttackDefendListener()
