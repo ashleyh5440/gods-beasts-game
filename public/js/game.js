@@ -327,6 +327,3 @@ const loadScores = async () => {
 };
 
 addAttackDefendListener()
-
-
-
