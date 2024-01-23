@@ -355,10 +355,7 @@ label {
   background-image: url(../images/game-background.jpg);
   background-size: contain;
   background-repeat: no-repeat;
-  display: flex; 
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  position: relative;
   z-index: 0;
 }
 
@@ -368,7 +365,6 @@ label {
   font-weight: 700;
   font-size: 100px;
 }
-
 
 .opponent {
   display: flex;
@@ -426,6 +422,13 @@ label {
   width: 49%;
 }
 
+.game-over, .game-over-lose{
+  position: absolute;
+  text-align: center;
+  width: 30%;
+  left: 33%;
+}
+
 .button-container {
   display: flex;
   flex-direction: row;
@@ -451,6 +454,10 @@ label {
 
 .user-life-points p, .opponent-life-points p {
   font-size: 25px;
+}
+
+.win p, .losses p, .ties p {
+  font-size: 1px;
 }
 
 .user-deck-container {
