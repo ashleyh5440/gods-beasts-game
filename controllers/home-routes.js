@@ -29,7 +29,7 @@ router.get('/createdeck', async (req, res) => {
     res.status(500).json(err);
   }
 
-  res.render('log_sign');
+  // res.render('log_sign');
 })
 
 // for user's deck
