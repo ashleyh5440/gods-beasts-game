@@ -258,19 +258,6 @@ function checkGameStatus() {
     }
 }
 
-//game over screen
-// const gameOverScreen = `<section class="game-over hidden">
-// <br>
-// <h2 style="font-family: 'Italianno', cursive;"id= "game-over-heading">${}</h2>
-// <h3 style="font-family: inherit;">Game Over</h3>
-// <p>${finalScore}</p> 
-// <button type="button" class="btn btn-primary" id="game-screen-new-game">New Game</button>
-// <a href="/">
-// <button type="button" class="btn btn-primary" id="game-screen-home">Home</button>
-// </a>
-// </section>`
-
-
 //reset game
 const resetGame = () => {
     userLifePoints = 10000;
